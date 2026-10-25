@@ -1,0 +1,36 @@
+{
+  "eski_fiyat": "6.000 TL",
+  "yeni_fiyat": "5.000 TL",
+  "fiyat_ek": "'den başlayan fiyatlarla",
+  "etiketler": ["Kesim ücretsiz", "Kredi kartı geçerli"],
+  "whatsapp": "0533 778 83 03",
+  "saat": "17:00",
+  "gunler": ["Pazartesi", "Çarşamba", "Cuma", "Pazar"],
+  "kirpma": {"foto04.jpg": [0.15, 0.35], "foto07.jpg": [0.15, 0.35], "foto11.jpg": [0.5, 0.35]},
+  "metinler": {
+    "Pazartesi": [
+      ["Can Besicilik", "Niyetiniz bize emanettir", "Adak, akika ve şükür kurbanlarınızı İslami usullere uygun şekilde kesip teslim ediyor, dilerseniz ihtiyaç sahiplerine ulaştırıyoruz."],
+      ["Yeni haftaya bereketle", "Hayırlı haftalar", "Adak, akika ve şükür kurbanlarınız için sağlıklı ve uygun fiyatlı hayvanlarla hizmetinizdeyiz."],
+      ["Can Besicilik", "Sağlıklı hayvan, uygun fiyat", "Seçilmiş sağlıklı hayvanlarımızla adağınızı zamanında kesip teslim ediyoruz."],
+      ["Adak ve akika", "Niyetiniz yerini bulsun", "Kurbanınızı dilerseniz sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."]
+    ],
+    "Çarşamba": [
+      ["Can Besicilik", "İslami usullere uygun kesim", "Her kesim titizlikle, temizlik ve hijyen kurallarına uygun olarak gerçekleştirilir."],
+      ["Adak kurbanı", "Adağınızı geciktirmeyin", "Adak, akika ve şükür kurbanı talepleriniz için WhatsApp hattımızdan bize ulaşabilirsiniz."],
+      ["İhtiyaç sahiplerine", "Paylaştıkça bereket artar", "Adaklarınızı dilerseniz ihtiyaç sahiplerine sizin adınıza ulaştırıyoruz."],
+      ["Akika kurbanı", "Yeni doğan bebeğiniz için", "Akika kurbanınızı İslami usullere uygun şekilde kesip teslim ediyoruz. Hayırlı uğurlu olsun."]
+    ],
+    "Cuma": [
+      ["Hayırlı Cumalar", "Allah kabul etsin", "Mübarek Cuma gününde bize emanet edilen her niyet için teşekkür ederiz."],
+      ["Hayırlı Cumalar", "Dualarınız kabul olsun", "Mübarek Cuma gününüz hayırlara vesile olsun."],
+      ["Hayırlı Cumalar", "Bereketli bir Cuma dileriz", "Adak ve şükür kurbanlarınızla hayırlarınıza vesile olmaktan onur duyuyoruz."],
+      ["Hayırlı Cumalar", "Cumanız mübarek olsun", "Rabbim niyetlerinizi kabul, dualarınızı makbul eylesin."]
+    ],
+    "Pazar": [
+      ["Teşekkür ederiz", "Güveniniz için teşekkürler", "Bir haftayı daha sizlerle tamamladık. Yeni haftanın siparişleri için şimdiden bilgi alabilirsiniz."],
+      ["Şükür kurbanı", "Şükrünüzü paylaşın", "Sevinçli günlerinizde şükür kurbanınızı sizin için kesip teslim ediyoruz."],
+      ["Can Besicilik", "Allah kabul etsin", "Bize emanet edilen tüm adaklar için teşekkür eder, huzurlu bir pazar dileriz."],
+      ["Yeni hafta siparişleri", "Planınızı şimdiden yapın", "Adak, akika ve şükür kurbanı için önceden sipariş verebilir, gün ve saat belirleyebilirsiniz."]
+    ]
+  }
+}
