@@ -116,7 +116,29 @@ def build(name):
             p.stdin.write(fr.tobytes())
     p.stdin.close()
     p.wait()
+    add_music(out)
     print(out, file=sys.stderr)
+
+
+def add_music(path):
+    """Videoya telifsiz müzik gömer (Facebook için; Instagram'da kütüphane müziği kullanılır, video sesi 0)."""
+    import muzik
+    dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                                         '-of', 'csv=p=0', path]).decode().strip())
+    wav = path[:-4] + '_muzik.wav'
+    tmp = path[:-4] + '_tmp.mp4'
+    muzik.make(wav, dur)
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-i', wav, '-map', '0:v', '-map', '1:a',
+                    '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', tmp],
+                   check=True)
+    os.replace(tmp, path)
+    os.remove(wav)
+
+
+if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == '--muzik':
+    for f in sys.argv[2:]:
+        add_music(f)
+    sys.exit(0)
 
 
 if __name__ == '__main__':
