@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto047.jpg",
+   "video098.mp4",
    "İhtiyaç sahiplerine",
    "Adağınız yerini bulsun"
   ],
   [
-   "foto048.jpg",
+   "video099.mp4",
    "Paylaştıkça bereket",
    "Sizin adınıza ulaştırıyoruz"
   ],
   [
-   "foto049.jpg",
+   "video100.mp4",
    "Can Besicilik",
    "Niyetiniz bize emanet"
   ]
@@ -23,5 +23,6 @@
   "Kurbanınızı dilerseniz sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."
  ],
  "tema": "siyah",
- "v": 292
+ "v": 292,
+ "video": true
 }

@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto035.jpg",
+   "video094.mp4",
    "Özel indirim",
    "Birden fazla alımda özel fiyat"
   ],
   [
-   "foto036.jpg",
+   "video095.mp4",
    "Adak • Şükür • Akika",
    "5.000 TL'den başlayan fiyatlar"
   ],
   [
-   "foto037.jpg",
+   "video096.mp4",
    "Hemen arayın",
    "Yerimize bekleriz"
   ]
@@ -23,5 +23,6 @@
   "Toplu adak ve şükür kurbanları için bizi arayın."
  ],
  "tema": "zeytin",
- "v": 287
+ "v": 287,
+ "video": true
 }

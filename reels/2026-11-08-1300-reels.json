@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto067.jpg",
+   "video104.mp4",
    "Şükür kurbanı",
    "Sevinçli günlerinizde"
   ],
   [
-   "foto068.jpg",
+   "video001.mp4",
    "Can Besicilik",
    "Şükrünüzü paylaşın"
   ],
   [
-   "foto069.jpg",
+   "video002.mp4",
    "Uygun fiyat",
    "5.000 TL'den başlayan fiyatlar"
   ]
@@ -23,5 +23,6 @@
   "Şükür kurbanınızı sizin için kesip teslim ediyoruz."
  ],
  "tema": "bordo",
- "v": 301
+ "v": 301,
+ "video": true
 }

@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto079.jpg",
+   "video005.mp4",
    "Yetişen alıyor",
    "Adaklıklar tükeniyor"
   ],
   [
-   "foto08.jpg",
+   "video006.mp4",
    "Son günler",
    "Fiyatlar artmadan gelin"
   ],
   [
-   "foto080.jpg",
+   "video007.mp4",
    "Can Besicilik",
    "Hayvanınızı kendiniz seçin"
   ]
@@ -23,5 +23,6 @@
   "Adaklıklar tükenmeden yerinizi ayırtın."
  ],
  "tema": "yesil",
- "v": 306
+ "v": 306,
+ "video": true
 }
