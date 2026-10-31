@@ -187,7 +187,7 @@ def add_music(path):
                                          '-of', 'csv=p=0', path]).decode().strip())
     wav = path[:-4] + '_muzik.wav'
     tmp = path[:-4] + '_tmp.mp4'
-    muzik.make(wav, dur)
+    muzik.make(wav, dur, varyant=os.path.basename(path))
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-i', wav, '-map', '0:v', '-map', '1:a',
                     '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', tmp],
                    check=True)

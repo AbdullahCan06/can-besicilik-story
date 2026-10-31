@@ -65,8 +65,17 @@ def add(track, sig, at, gain=1.0):
     track[i:j] += sig[:j - i] * gain
 
 
-def make(path, seconds):
-    np.random.seed(7)
+def make(path, seconds, varyant=None):
+    """varyant verilirse tempo, ton, akor dizisi, melodi ve çalgı rengi değişir (her video farklı müzik)."""
+    global BPM, BEAT
+    rng = np.random.RandomState(7 if varyant is None else (__import__('zlib').crc32(str(varyant).encode()) % (2 ** 31)))
+    np.random.seed(rng.randint(0, 2 ** 31 - 1))
+    if varyant is not None:
+        BPM = int(rng.choice([100, 106, 112, 116, 120, 126, 132]))
+        BEAT = 60 / BPM
+        return _make_var(path, seconds, rng)
+    BPM = 116
+    BEAT = 60 / BPM
     n = int(SR * (seconds + 1))
     mix = np.zeros(n)
     # Do majör: C – G – Am – F (her akor 2 ölçü değil, 1 ölçü = 4 vuruş)
@@ -101,6 +110,63 @@ def make(path, seconds):
     mix = mix[:int(SR * seconds)]
     # giriş/çıkış yumuşatma
     fi, fo = int(SR * 0.15), int(SR * 1.5)
+    mix[:fi] *= np.linspace(0, 1, fi)
+    mix[-fo:] *= np.linspace(1, 0, fo)
+    mix = np.tanh(mix * 1.1)
+    mix /= np.max(np.abs(mix)) + 1e-9
+    mix *= 0.85
+    st = np.stack([mix, np.roll(mix, int(SR * 0.008))], axis=1)
+    with wave.open(path, 'wb') as w:
+        w.setnchannels(2)
+        w.setsampwidth(2)
+        w.setframerate(SR)
+        w.writeframes((st * 32767).astype(np.int16).tobytes())
+
+
+def _make_var(path, seconds, rng):
+    tr = int(rng.randint(-4, 5))                       # ton kaydırma
+    progs = [
+        [[60, 64, 67], [55, 59, 62], [57, 60, 64], [53, 57, 60]],   # I-V-vi-IV
+        [[60, 64, 67], [53, 57, 60], [55, 59, 62], [60, 64, 67]],   # I-IV-V-I
+        [[57, 60, 64], [53, 57, 60], [60, 64, 67], [55, 59, 62]],   # vi-IV-I-V
+        [[60, 64, 67], [57, 60, 64], [53, 57, 60], [55, 59, 62]],   # I-vi-IV-V
+        [[62, 65, 69], [55, 59, 62], [60, 64, 67], [57, 60, 64]],   # ii-V-I-vi
+    ]
+    chords = [[n + tr for n in c] for c in progs[rng.randint(len(progs))]]
+    roots = [c[0] - 24 for c in chords]
+    scale = [0, 2, 4, 5, 7, 9, 11]
+    bright = float(rng.uniform(0.35, 0.65))
+    bell_gain = float(rng.uniform(0.2, 0.32))
+    strum2 = rng.rand() < 0.6
+    n = int(SR * (seconds + 1))
+    mix = np.zeros(n)
+    beats = int(seconds / BEAT) + 1
+    # 2 ölçülük rastgele melodi motifi, akorlara uyan notalardan
+    motif = []
+    t = 0.0
+    while t < 8:
+        d = float(rng.choice([0.5, 0.5, 1.0, 1.0, 1.5]))
+        bar = int(t // 4) % 4
+        pool = [x + 12 for x in chords[bar]] + [72 + tr + scale[rng.randint(7)]]
+        motif.append((t, int(pool[rng.randint(len(pool))]), d))
+        t += d
+    for b in range(beats):
+        bar = (b // 4) % 4
+        tt = b * BEAT
+        for k, off in enumerate((0, 0.5) if strum2 else (0,)):
+            for mm, nn in enumerate(chords[bar]):
+                add(mix, pluck(note(nn), BEAT * 1.2, bright), tt + off * BEAT + mm * 0.012, 0.22 if k == 0 else 0.14)
+        if b % 2 == 0:
+            add(mix, bass(note(roots[bar]), BEAT * 1.8), tt, 0.55)
+        add(mix, kick(), tt, 0.7 if b % 2 == 0 else 0.45)
+        if b % 2 == 1:
+            add(mix, clap(), tt, 0.5)
+        add(mix, hat(), tt + BEAT / 2, 1.0)
+    for rep in range(0, beats, 8):
+        for bt, nn, d in motif:
+            add(mix, bell(note(nn), d * BEAT * 1.6), (rep + bt) * BEAT, bell_gain)
+    mix = mix[:int(SR * seconds)]
+    fi, fo = int(SR * 0.15), int(SR * 1.2)
     mix[:fi] *= np.linspace(0, 1, fi)
     mix[-fo:] *= np.linspace(1, 0, fo)
     mix = np.tanh(mix * 1.1)

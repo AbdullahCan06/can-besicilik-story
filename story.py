@@ -251,7 +251,7 @@ def video_story(video, label, headline, out, tema=None, v=None, sure=10):
     png = out[:-4] + '_kat.png'
     wav = out[:-4] + '_muzik.wav'
     overlay_png(label, headline, png, tema=tema, v=v)
-    muzik.make(wav, sure)
+    muzik.make(wav, sure, varyant=os.path.basename(out))
     # kısa videolar başa sararak süreyi doldurur
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-stream_loop', '-1', '-i', video, '-i', png, '-i', wav,
                     '-filter_complex',
