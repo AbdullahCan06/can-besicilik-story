@@ -125,8 +125,13 @@ def main():
             acik = ekler[v % len(ekler)] + spec['aciklama']
             if '0533' not in spec['aciklama']:
                 acik += '\n\n' + son[v % len(son)]
-            plan.append({'tarih': tarih, 'tur': 'REEL', 'baslik': sl[0][1],
-                         'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': acik, 'muzik': muz})
+            item = {'tarih': tarih, 'tur': 'REEL', 'baslik': sl[0][1],
+                    'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': acik, 'muzik': muz}
+            rk = cfg.get('reklam') or {}
+            if rk.get('aktif') and gun in rk.get('gunler', []) and s['saat'] == rk.get('saat'):
+                item['reklam_butce'] = rk['butce_tl']
+                item['reklam_odeyen'] = rk['odeyen']
+            plan.append(item)
     print(json.dumps(plan, ensure_ascii=False, indent=2))
 
 

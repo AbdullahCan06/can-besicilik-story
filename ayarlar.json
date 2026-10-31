@@ -1110,5 +1110,15 @@
       "Uygun fiyat, sağlıklı hayvan",
       ""
     ]
-  ]
+  ],
+  "reklam": {
+    "aktif": true,
+    "gunler": [
+      "Salı",
+      "Perşembe"
+    ],
+    "saat": "20:00",
+    "butce_tl": 500,
+    "odeyen": "Can Besicilik"
+  }
 }
