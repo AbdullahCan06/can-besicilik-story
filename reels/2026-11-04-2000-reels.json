@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto049.jpg",
+   "video068.mp4",
    "Cuma bereketi",
    "Hayırlı Cumalar"
   ],
   [
-   "foto05.jpg",
+   "video069.mp4",
    "Adak ve şükür",
    "Niyetiniz kabul olsun"
   ],
   [
-   "foto050.jpg",
+   "video070.mp4",
    "Can Besicilik",
    "Hizmetinizdeyiz"
   ]
@@ -23,5 +23,6 @@
   "Adak ve şükür kurbanlarınız için bize ulaşın."
  ],
  "tema": "siyah",
- "v": 250
+ "v": 250,
+ "video": true
 }

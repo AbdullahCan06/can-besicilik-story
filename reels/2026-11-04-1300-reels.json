@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto037.jpg",
+   "video064.mp4",
    "Can Besicilik",
    "Hayvanlarımızı görün"
   ],
   [
-   "foto038.jpg",
+   "video065.mp4",
    "Bakımlı ve sağlıklı",
    "Her gün özenle"
   ],
   [
-   "foto039.jpg",
+   "video066.mp4",
    "Gelin, seçin",
    "Yerimize bekleriz"
   ]
@@ -23,5 +23,6 @@
   "Adaklığınızı yerinde seçme imkânı."
  ],
  "tema": "zeytin",
- "v": 245
+ "v": 245,
+ "video": true
 }

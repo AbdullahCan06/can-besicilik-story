@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto17.jpg",
+   "video059.mp4",
    "Adak kurbanı",
    "Adağınızı ertelemeyin"
   ],
   [
-   "foto18.jpg",
+   "video060.mp4",
    "Can Besicilik",
    "Kesip teslim ediyoruz"
   ],
   [
-   "foto19.jpg",
+   "video061.mp4",
    "İsterseniz",
    "İhtiyaç sahiplerine ulaştırırız"
   ]
@@ -23,5 +23,6 @@
   "Gün ve saati siz belirleyin, gerisini bize bırakın."
  ],
  "tema": "lacivert",
- "v": 236
+ "v": 236,
+ "video": true
 }

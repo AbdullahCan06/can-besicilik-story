@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto070.jpg",
+   "video044.mp4",
    "Aksaray yaylası",
    "Yaylım hayvanları"
   ],
   [
-   "foto071.jpg",
+   "video045.mp4",
    "Veteriner kontrollü",
    "Sağlıklı kurbanlıklar"
   ],
   [
-   "foto072.jpg",
+   "video046.mp4",
    "Adaklık yaşında",
    "Gönül rahatlığıyla"
   ]
@@ -23,5 +23,6 @@
   "Veteriner kontrollü Aksaray yaylım hayvanı."
  ],
  "tema": "bordo",
- "v": 217
+ "v": 217,
+ "video": true
 }

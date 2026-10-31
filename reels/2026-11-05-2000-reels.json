@@ -1,22 +1,22 @@
 {
  "slaytlar": [
   [
-   "foto080.jpg",
+   "video079.mp4",
    "Can Besicilik",
    "Adak, akika ve şükür kurbanı"
   ],
   [
-   "foto081.jpg",
+   "video080.mp4",
    "Sağlıklı hayvanlar",
    "Özenle seçilmiş, bakımlı"
   ],
   [
-   "foto082.jpg",
+   "video081.mp4",
    "Uygun fiyat",
    "5.000 TL'den başlayan fiyatlar"
   ],
   [
-   "foto083.jpg",
+   "video079.mp4",
    "Paylaştıkça bereket",
    "İhtiyaç sahiplerine ulaştırıyoruz"
   ]
@@ -28,5 +28,6 @@
   "İslami usullere uygun kesim, zamanında teslim."
  ],
  "tema": "yesil",
- "v": 264
+ "v": 264,
+ "video": true
 }

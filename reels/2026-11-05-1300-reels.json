@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto069.jpg",
+   "video074.mp4",
    "Fiyat",
    "5.000 TL'den başlıyor"
   ],
   [
-   "foto07.jpg",
+   "video075.mp4",
    "Her şey pahalanıyor",
    "Bu fiyat kalmaz"
   ],
   [
-   "foto070.jpg",
+   "video076.mp4",
    "Hemen gelin",
    "Yerinizi ayırtın"
   ]
@@ -23,5 +23,6 @@
   "5.000 TL'den başlayan fiyatlarla."
  ],
  "tema": "bordo",
- "v": 259
+ "v": 259,
+ "video": true
 }

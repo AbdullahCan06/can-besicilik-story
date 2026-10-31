@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto101.jpg",
+   "video055.mp4",
    "Toplu alım",
    "Birden fazla alımda indirim"
   ],
   [
-   "foto102.jpg",
+   "video056.mp4",
    "Aile ve dernekler",
    "Size özel fiyat"
   ],
   [
-   "foto103.jpg",
+   "video057.mp4",
    "Hemen arayın",
    "Teklif alın"
   ]
@@ -23,5 +23,6 @@
   "Birden fazla adak için bizi arayın."
  ],
  "tema": "kahve",
- "v": 231
+ "v": 231,
+ "video": true
 }

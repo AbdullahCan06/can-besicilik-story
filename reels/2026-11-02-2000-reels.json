@@ -1,17 +1,17 @@
 {
  "slaytlar": [
   [
-   "foto082.jpg",
+   "video049.mp4",
    "Ankara içi",
    "Eve kadar teslim"
   ],
   [
-   "foto083.jpg",
+   "video050.mp4",
    "Kesim ücretsiz",
    "Kesim bizden"
   ],
   [
-   "foto084.jpg",
+   "video051.mp4",
    "Kredi kartı",
    "Kartla ödeme"
   ]
@@ -23,5 +23,6 @@
   "Kesim ve teslimat bizden."
  ],
  "tema": "yesil",
- "v": 222
+ "v": 222,
+ "video": true
 }

@@ -1,22 +1,22 @@
 {
  "slaytlar": [
   [
-   "foto10.jpg",
+   "video085.mp4",
    "Hayvanlarımız",
    "Her gün özenle bakılıyor"
   ],
   [
-   "foto100.jpg",
+   "video086.mp4",
    "Can Besicilik",
    "Sağlıklı ve bakımlı"
   ],
   [
-   "foto101.jpg",
+   "video087.mp4",
    "Adağınıza uygun",
    "Doğru hayvanı birlikte seçelim"
   ],
   [
-   "foto102.jpg",
+   "video085.mp4",
    "Kesim ücretsiz",
    "Kredi kartı geçerli"
   ]
@@ -28,5 +28,6 @@
   "Adak, akika ve şükür kurbanınızı kesip teslim ediyoruz."
  ],
  "tema": "kahve",
- "v": 273
+ "v": 273,
+ "video": true
 }
