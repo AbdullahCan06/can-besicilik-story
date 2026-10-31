@@ -1,26 +1,27 @@
 {
  "slaytlar": [
   [
-   "foto16.jpg",
-   "İhtiyaç sahiplerine",
-   "Adağınız yerini bulsun"
-  ],
-  [
    "foto17.jpg",
-   "Paylaştıkça bereket",
-   "Sizin adınıza ulaştırıyoruz"
+   "Adak kurbanı",
+   "Adağınızı ertelemeyin"
   ],
   [
    "foto18.jpg",
    "Can Besicilik",
-   "Niyetiniz bize emanet"
+   "Kesip teslim ediyoruz"
+  ],
+  [
+   "foto19.jpg",
+   "İsterseniz",
+   "İhtiyaç sahiplerine ulaştırırız"
   ]
  ],
  "kapanis": [
-  "foto20.jpg",
-  "İhtiyaç sahiplerine",
+  "foto22.jpg",
+  "Adak kurbanı",
   "Adağınız yerini bulsun",
-  "Kurbanınızı dilerseniz sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."
+  "Gün ve saati siz belirleyin, gerisini bize bırakın."
  ],
- "tema": "lacivert"
+ "tema": "lacivert",
+ "v": 236
 }

@@ -1,26 +1,32 @@
 {
  "slaytlar": [
   [
-   "foto22.jpg",
-   "Özel indirim",
-   "Birden fazla alımda özel fiyat"
+   "foto10.jpg",
+   "Hayvanlarımız",
+   "Her gün özenle bakılıyor"
   ],
   [
-   "foto23.jpg",
-   "Adak • Şükür • Akika",
-   "5.000 TL'den başlayan fiyatlar"
+   "foto100.jpg",
+   "Can Besicilik",
+   "Sağlıklı ve bakımlı"
   ],
   [
-   "foto24.jpg",
-   "Hemen arayın",
-   "Yerimize bekleriz"
+   "foto101.jpg",
+   "Adağınıza uygun",
+   "Doğru hayvanı birlikte seçelim"
+  ],
+  [
+   "foto102.jpg",
+   "Kesim ücretsiz",
+   "Kredi kartı geçerli"
   ]
  ],
  "kapanis": [
-  "foto01.jpg",
-  "Özel indirim",
-  "Birden fazla alımda indirim",
-  "Toplu adak ve şükür kurbanları için bizi arayın."
+  "foto103.jpg",
+  "Can Besicilik",
+  "Siparişiniz için bize yazın",
+  "Adak, akika ve şükür kurbanınızı kesip teslim ediyoruz."
  ],
- "tema": "kahve"
+ "tema": "kahve",
+ "v": 273
 }

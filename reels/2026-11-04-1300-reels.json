@@ -1,26 +1,27 @@
 {
  "slaytlar": [
   [
-   "foto16.jpg",
-   "Şükür kurbanı",
-   "Sevinçli günlerinizde"
-  ],
-  [
-   "foto17.jpg",
+   "foto037.jpg",
    "Can Besicilik",
-   "Şükrünüzü paylaşın"
+   "Hayvanlarımızı görün"
   ],
   [
-   "foto18.jpg",
-   "Uygun fiyat",
-   "5.000 TL'den başlayan fiyatlar"
+   "foto038.jpg",
+   "Bakımlı ve sağlıklı",
+   "Her gün özenle"
+  ],
+  [
+   "foto039.jpg",
+   "Gelin, seçin",
+   "Yerimize bekleriz"
   ]
  ],
  "kapanis": [
-  "foto20.jpg",
-  "Şükür kurbanı",
-  "Şükrünüzü paylaşın",
-  "Şükür kurbanınızı sizin için kesip teslim ediyoruz."
+  "foto040.jpg",
+  "Yerimize bekleriz",
+  "Gelin, görün, seçin",
+  "Adaklığınızı yerinde seçme imkânı."
  ],
- "tema": "zeytin"
+ "tema": "zeytin",
+ "v": 245
 }

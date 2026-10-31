@@ -1,31 +1,27 @@
 {
  "slaytlar": [
   [
-   "foto07.jpg",
+   "foto049.jpg",
+   "Cuma bereketi",
+   "Hayırlı Cumalar"
+  ],
+  [
+   "foto05.jpg",
+   "Adak ve şükür",
+   "Niyetiniz kabul olsun"
+  ],
+  [
+   "foto050.jpg",
    "Can Besicilik",
-   "Adak, akika ve şükür kurbanı"
-  ],
-  [
-   "foto08.jpg",
-   "Sağlıklı hayvanlar",
-   "Özenle seçilmiş, bakımlı"
-  ],
-  [
-   "foto09.jpg",
-   "Uygun fiyat",
-   "5.000 TL'den başlayan fiyatlar"
-  ],
-  [
-   "foto10.jpg",
-   "Paylaştıkça bereket",
-   "İhtiyaç sahiplerine ulaştırıyoruz"
+   "Hizmetinizdeyiz"
   ]
  ],
  "kapanis": [
-  "foto11.jpg",
-  "Can Besicilik",
-  "Niyetiniz bize emanettir",
-  "İslami usullere uygun kesim, zamanında teslim."
+  "foto052.jpg",
+  "Hayırlı Cumalar",
+  "Allah kabul etsin",
+  "Adak ve şükür kurbanlarınız için bize ulaşın."
  ],
- "tema": "siyah"
+ "tema": "siyah",
+ "v": 250
 }

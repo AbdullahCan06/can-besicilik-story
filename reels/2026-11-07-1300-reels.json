@@ -1,26 +1,27 @@
 {
  "slaytlar": [
   [
-   "foto12.jpg",
-   "Şükür kurbanı",
-   "Sevinçli günlerinizde"
+   "foto035.jpg",
+   "Özel indirim",
+   "Birden fazla alımda özel fiyat"
   ],
   [
-   "foto14.jpg",
-   "Can Besicilik",
-   "Şükrünüzü paylaşın"
-  ],
-  [
-   "foto15.jpg",
-   "Uygun fiyat",
+   "foto036.jpg",
+   "Adak • Şükür • Akika",
    "5.000 TL'den başlayan fiyatlar"
+  ],
+  [
+   "foto037.jpg",
+   "Hemen arayın",
+   "Yerimize bekleriz"
   ]
  ],
  "kapanis": [
-  "foto17.jpg",
-  "Şükür kurbanı",
-  "Şükrünüzü paylaşın",
-  "Şükür kurbanınızı sizin için kesip teslim ediyoruz."
+  "foto039.jpg",
+  "Özel indirim",
+  "Birden fazla alımda indirim",
+  "Toplu adak ve şükür kurbanları için bizi arayın."
  ],
- "tema": "zeytin"
+ "tema": "zeytin",
+ "v": 287
 }
