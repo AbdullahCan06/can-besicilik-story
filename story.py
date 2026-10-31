@@ -157,7 +157,8 @@ def variant(v):
 def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None):
     set_tema(tema)
     kamp = variant(v)
-    base = cover(Image.open(photo), W, H, ybias, xbias)
+    src = photo if isinstance(photo, Image.Image) else Image.open(photo)
+    base = cover(src, W, H, ybias, xbias)
 
     b0 = H * (0.20 if kamp else 0.28)
     grad = Image.new('L', (1, H))
@@ -223,7 +224,43 @@ def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=
     d.text((M + 2 * r + 22, cy + 18), CFG['whatsapp'], font=font('Poppins-Bold.ttf', 50), fill=CREAM,
            anchor='lm')
 
+    if out is None:
+        return base
     base.save(out, quality=92)
+
+
+def overlay_png(label, headline, out, tema=None, v=None):
+    """Story yazı katmanını şeffaf PNG olarak üretir (videonun üstüne bindirmek için).
+    Siyah ve beyaz zemin üzerinde iki kez çizip farkından saydamlığı hesaplar."""
+    import numpy as np
+    a = np.asarray(make(Image.new('RGB', (W, H), (0, 0, 0)), label, headline, '', None, tema=tema, v=v),
+                   dtype=np.float32)
+    b = np.asarray(make(Image.new('RGB', (W, H), (255, 255, 255)), label, headline, '', None, tema=tema, v=v),
+                   dtype=np.float32)
+    alpha = 1.0 - (b - a).mean(axis=2) / 255.0
+    alpha = np.clip(alpha, 0, 1)
+    rgb = np.where(alpha[..., None] > 0.003, a / np.maximum(alpha[..., None], 0.003), 0)
+    rgba = np.dstack([np.clip(rgb, 0, 255), alpha * 255]).astype(np.uint8)
+    Image.fromarray(rgba, 'RGBA').save(out)
+
+
+def video_story(video, label, headline, out, tema=None, v=None, sure=10):
+    """Videonun üstüne story yazı katmanını bindirir, telifsiz müzik ekler."""
+    import subprocess
+    import muzik
+    png = out[:-4] + '_kat.png'
+    wav = out[:-4] + '_muzik.wav'
+    overlay_png(label, headline, png, tema=tema, v=v)
+    muzik.make(wav, sure)
+    # kısa videolar başa sararak süreyi doldurur
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-stream_loop', '-1', '-i', video, '-i', png, '-i', wav,
+                    '-filter_complex',
+                    f'[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps=30,trim=duration={sure},'
+                    f'setpts=PTS-STARTPTS[v];[v][1:v]overlay=0:0,format=yuv420p[o]',
+                    '-map', '[o]', '-map', '2:a', '-t', str(sure), '-c:v', 'libx264', '-preset', 'veryfast',
+                    '-crf', '23', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', out], check=True)
+    os.remove(png)
+    os.remove(wav)
 
 
 if __name__ == '__main__':

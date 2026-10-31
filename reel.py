@@ -90,8 +90,54 @@ def slide_frames(path, xbias, ybias, top, head, n, zoom_in=True, v=None):
         yield np.asarray(fr.convert('RGB'))
 
 
+def build_video(name, spec):
+    """Videolardan Reels: her slayt 3,5 sn video + yazı katmanı, sonda kapanış kartı, gömülü müzik."""
+    tema = spec.get('tema')
+    tmp = os.path.join(ROOT, 'reels', name + '_tmp')
+    os.makedirs(tmp, exist_ok=True)
+    parts = []
+    for k, (video, top, head) in enumerate(spec['slaytlar']):
+        story.set_tema(tema)
+        png = os.path.join(tmp, f'k{k}.png')
+        overlay(top, head, (spec.get('v', 0) + k) if 'v' in spec else None).save(png)
+        seg = os.path.join(tmp, f's{k}.mp4')
+        vp = os.path.join(ROOT, 'videolar', video)
+        dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                                             '-of', 'csv=p=0', vp]).decode().strip())
+        ss = min(1.0, max(0.0, dur - SLIDE))
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', str(ss), '-i', vp, '-i', png,
+                        '-filter_complex',
+                        f'[0:v]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},'
+                        f'trim=duration={SLIDE},setpts=PTS-STARTPTS,tpad=stop_mode=clone:stop_duration={SLIDE}[v];'
+                        f'[v][1:v]overlay=0:0,trim=duration={SLIDE},format=yuv420p[o]',
+                        '-map', '[o]', '-an', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '22', seg],
+                       check=True)
+        parts.append(seg)
+    photo, lab, head, body = spec['kapanis']
+    xb, yb = story.CFG['kirpma'].get(photo, [0.5, 0.35])
+    endp = os.path.join(tmp, 'kapanis.jpg')
+    story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb, tema=tema,
+               v=(spec['v'] + 5) if 'v' in spec else None)
+    seg = os.path.join(tmp, 'son.mp4')
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-loop', '1', '-i', endp, '-t', str(LAST),
+                    '-vf', f'fps={FPS},format=yuv420p', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '22', seg],
+                   check=True)
+    parts.append(seg)
+    lst = os.path.join(tmp, 'liste.txt')
+    open(lst, 'w').write(''.join(f"file '{p}'\n" for p in parts))
+    out = os.path.join(ROOT, 'reels', name + '.mp4')
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lst,
+                    '-c', 'copy', '-movflags', '+faststart', out], check=True)
+    add_music(out)
+    import shutil
+    shutil.rmtree(tmp)
+    print(out, file=sys.stderr)
+
+
 def build(name):
     spec = json.load(open(os.path.join(ROOT, 'reels', name + '.json'), encoding='utf-8'))
+    if spec.get('video'):
+        return build_video(name, spec)
     tema = spec.get('tema')
     story.set_tema(tema)
     crop = story.CFG['kirpma']

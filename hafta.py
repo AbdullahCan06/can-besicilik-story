@@ -20,6 +20,13 @@ GUNLER = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 
 EPOCH = dt.date(2026, 10, 26)
 
 
+def videos():
+    d = os.path.join(ROOT, 'videolar')
+    if not os.path.isdir(d):
+        return []
+    return sorted(f for f in os.listdir(d) if f.lower().endswith('.mp4'))
+
+
 def photos():
     d = os.path.join(ROOT, 'fotograflar')
     return sorted(f for f in os.listdir(d) if f.lower().endswith(('.jpg', '.jpeg', '.png')))
@@ -40,6 +47,8 @@ def main():
         monday = g - dt.timedelta(days=g.weekday())
     week = (monday - EPOCH).days // 7
     ph = photos()
+    vids = videos()
+    vcount = week * 41
     crop = cfg['kirpma']
     os.makedirs(os.path.join(ROOT, 'stories'), exist_ok=True)
     os.makedirs(os.path.join(ROOT, 'reels'), exist_ok=True)
@@ -64,6 +73,13 @@ def main():
         need = 4 if s['tur'] == 'reels' else 1
         my_photos = [ph[(pcount + j) % len(ph)] for j in range(need + 1)]
         pcount += need + 1
+        # videolu mu? Reels her zaman (video varsa); story'lerin yaklaşık üçte biri
+        use_video = bool(vids) and (s['tur'] == 'reels' or k % 3 == 1)
+        my_vids = []
+        if use_video:
+            nv = 3 if s['tur'] == 'reels' else 1
+            my_vids = [vids[(vcount + j) % len(vids)] for j in range(nv)]
+            vcount += nv
         if a.gun and day.isoformat() != a.gun:
             continue
         if a.sadece and s['ad'] != a.sadece:
@@ -78,19 +94,26 @@ def main():
             c_i = seen.get(key, 0)
             seen[key] = c_i + 1
             lab, head, body = pool[((week * 7 + i) * per_day[s['ad']] + c_i + week) % len(pool)]
-            p = my_photos[0]
-            xb, yb = crop.get(p, [0.5, 0.35])
-            out = os.path.join('stories', stamp + '.jpg')
-            story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
-                       ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)
+            if my_vids:
+                out = os.path.join('stories', stamp + '.mp4')
+                story.video_story(os.path.join(ROOT, 'videolar', my_vids[0]), lab, head, os.path.join(ROOT, out),
+                                  tema=tema, v=week * 211 + k)
+            else:
+                p = my_photos[0]
+                xb, yb = crop.get(p, [0.5, 0.35])
+                out = os.path.join('stories', stamp + '.jpg')
+                story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
+                           ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
             n = rcount.get(s['ad'], 0)
             rcount[s['ad']] = n + 1
             spec = cfg['reels'][(week * len(s['gunler']) + n) % len(cfg['reels'])]
             sl = spec['slaytlar']
-            js = {'slaytlar': [[my_photos[j % need], t, h] for j, (t, h) in enumerate(sl)],
-                  'kapanis': [my_photos[need]] + spec['kapanis'], 'tema': tema, 'v': week * 211 + k}
+            src = my_vids if my_vids else my_photos[:need]
+            js = {'slaytlar': [[src[j % len(src)], t, h] for j, (t, h) in enumerate(sl)],
+                  'kapanis': [my_photos[need]] + spec['kapanis'], 'tema': tema, 'v': week * 211 + k,
+                  'video': bool(my_vids)}
             json.dump(js, open(os.path.join(ROOT, 'reels', stamp + '.json'), 'w', encoding='utf-8'),
                       ensure_ascii=False, indent=1)
             reel.build(stamp)
