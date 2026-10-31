@@ -116,7 +116,7 @@ def build(name):
             p.stdin.write(fr.tobytes())
     p.stdin.close()
     p.wait()
-    print(out)
+    print(out, file=sys.stderr)
 
 
 if __name__ == '__main__':
