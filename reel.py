@@ -20,7 +20,7 @@ SLIDE, LAST, FADE = 3.2, 4.0, 0.5
 CREAM = story.CREAM
 
 
-def overlay(top, head):
+def overlay(top, head, v=None):
     """Şeffaf yazı katmanı: üstte logo, ortanın altında yeşil bant üzerinde yazı."""
     ov = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     # alt kısım yeşil geçiş
@@ -41,7 +41,7 @@ def overlay(top, head):
     d.ellipse((lx, ly, lx + L + 12, ly + L + 12), fill=CREAM + (255,))
     ov.paste(logo, (lx + 6, ly + 6), m)
 
-    kamp = story.CFG.get('kampanya') or {}
+    kamp = story.variant(v)
     d = ImageDraw.Draw(ov)
     if kamp.get('serit'):
         story.ribbon(d, ly + L + 12 + 20, kamp['serit'], size=38)
@@ -74,9 +74,9 @@ def base_photo(path, xbias, ybias, scale=1.12):
     return story.cover(im, int(W * scale), int(H * scale), ybias, xbias)
 
 
-def slide_frames(path, xbias, ybias, top, head, n, zoom_in=True):
+def slide_frames(path, xbias, ybias, top, head, n, zoom_in=True, v=None):
     big = base_photo(path, xbias, ybias)
-    ov = overlay(top, head)
+    ov = overlay(top, head, v)
     BW, BH = big.size
     for i in range(n):
         t = i / max(1, n - 1)
@@ -99,11 +99,13 @@ def build(name):
     for k, (photo, top, head) in enumerate(spec['slaytlar']):
         xb, yb = crop.get(photo, [0.5, 0.35])
         seq.append(list(slide_frames(os.path.join(ROOT, 'fotograflar', photo), xb, yb, top, head,
-                                     int(SLIDE * FPS), zoom_in=(k % 2 == 0))))
+                                     int(SLIDE * FPS), zoom_in=(k % 2 == 0),
+                                     v=(spec.get('v', 0) + k) if 'v' in spec else None)))
     photo, lab, head, body = spec['kapanis']
     xb, yb = crop.get(photo, [0.5, 0.35])
     endp = os.path.join(ROOT, 'reels', name + '_kapanis.jpg')
-    story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb, tema=tema)
+    story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb, tema=tema,
+               v=(spec['v'] + 5) if 'v' in spec else None)
     story.set_tema(tema)
     end = np.asarray(Image.open(endp).convert('RGB'))
     seq.append([end] * int(LAST * FPS))

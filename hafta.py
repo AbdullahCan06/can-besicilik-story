@@ -82,7 +82,7 @@ def main():
             xb, yb = crop.get(p, [0.5, 0.35])
             out = os.path.join('stories', stamp + '.jpg')
             story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
-                       ybias=yb, xbias=xb, tema=tema)
+                       ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
             n = rcount.get(s['ad'], 0)
@@ -90,14 +90,20 @@ def main():
             spec = cfg['reels'][(week * len(s['gunler']) + n) % len(cfg['reels'])]
             sl = spec['slaytlar']
             js = {'slaytlar': [[my_photos[j % need], t, h] for j, (t, h) in enumerate(sl)],
-                  'kapanis': [my_photos[need]] + spec['kapanis'], 'tema': tema}
+                  'kapanis': [my_photos[need]] + spec['kapanis'], 'tema': tema, 'v': week * 211 + k}
             json.dump(js, open(os.path.join(ROOT, 'reels', stamp + '.json'), 'w', encoding='utf-8'),
                       ensure_ascii=False, indent=1)
             reel.build(stamp)
             muz = cfg['reels_muzik'][(week + n) % len(cfg['reels_muzik'])]
+            kp = cfg.get('kampanya') or {}
+            v = week * 211 + k
+            ekler = kp.get('aciklama_ekleri') or [kp.get('aciklama_ek', '')]
+            son = kp.get('aciklama_son') or ['']
+            acik = ekler[v % len(ekler)] + spec['aciklama']
+            if '0533' not in spec['aciklama']:
+                acik += '\n\n' + son[v % len(son)]
             plan.append({'tarih': tarih, 'tur': 'REEL', 'baslik': sl[0][1],
-                         'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': (cfg.get('kampanya') or {}).get('aciklama_ek', '') + spec['aciklama'],
-                         'muzik': muz})
+                         'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': acik, 'muzik': muz})
     print(json.dumps(plan, ensure_ascii=False, indent=2))
 
 

@@ -136,9 +136,27 @@ def price_block(d, x, y, big=84):
     return y + PH
 
 
-def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None):
+def variant(v):
+    """Kampanya metinlerinden v'ye göre farklı bir kombinasyon seçer."""
+    k = dict(CFG.get('kampanya') or {})
+    if not k:
+        return k
+    if v is None:
+        return k
+    if k.get('seritler'):
+        k['serit'] = k['seritler'][v % len(k['seritler'])]
+    if k.get('uyarilar'):
+        k['uyari'] = k['uyarilar'][(v * 3 + 1) % len(k['uyarilar'])]
+    gh = k.get('guven_havuz')
+    if gh:
+        a = (v * 2) % len(gh)
+        k['guven'] = [gh[a], gh[(a + 1 + v % 3) % len(gh)]] if len(gh) > 2 else gh
+    return k
+
+
+def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None):
     set_tema(tema)
-    kamp = CFG.get('kampanya') or {}
+    kamp = variant(v)
     base = cover(Image.open(photo), W, H, ybias, xbias)
 
     b0 = H * (0.20 if kamp else 0.28)
