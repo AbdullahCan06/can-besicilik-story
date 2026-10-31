@@ -17,7 +17,7 @@ import story
 ROOT = os.path.dirname(os.path.abspath(__file__))
 W, H, FPS = 1080, 1920, 30
 SLIDE, LAST, FADE = 3.2, 4.0, 0.5
-GREEN, GOLD, CREAM = story.GREEN, story.GOLD, story.CREAM
+CREAM = story.CREAM
 
 
 def overlay(top, head):
@@ -26,10 +26,10 @@ def overlay(top, head):
     # alt kısım yeşil geçiş
     grad = Image.new('L', (1, H))
     for y in range(H):
-        a = 0 if y < H * 0.45 else min(1, (y - H * 0.45) / (H * 0.30)) ** 1.2 * 225
-        a = max(a, max(0, 1 - y / 360) * 120)
+        a = 0 if y < H * 0.36 else min(1, (y - H * 0.36) / (H * 0.20)) ** 1.1 * 238
+        a = max(a, max(0, 1 - y / 480) * 150)
         grad.putpixel((0, y), int(a))
-    ov.paste(Image.new('RGBA', (W, H), GREEN + (255,)), (0, 0), grad.resize((W, H)))
+    ov.paste(Image.new('RGBA', (W, H), story.GREEN + (255,)), (0, 0), grad.resize((W, H)))
     d = ImageDraw.Draw(ov)
 
     L = 170
@@ -41,21 +41,30 @@ def overlay(top, head):
     d.ellipse((lx, ly, lx + L + 12, ly + L + 12), fill=CREAM + (255,))
     ov.paste(logo, (lx + 6, ly + 6), m)
 
-    M = 90
-    fh = story.font('Poppins-Bold.ttf', 96)
+    kamp = story.CFG.get('kampanya') or {}
+    d = ImageDraw.Draw(ov)
+    if kamp.get('serit'):
+        story.ribbon(d, ly + L + 12 + 20, kamp['serit'], size=38)
+
+    M = 80
+    fh = story.font('Poppins-Bold.ttf', 92)
     ft = story.font('Poppins-Medium.ttf', 38)
     hl = story.wrap(d, head, fh, W - 2 * M - 120)
-    y = 1180 - (len(hl) - 1) * 108
+    y = 1040 - (len(hl) - 1) * 104
     x = M
     for ch in top.upper():
-        d.text((x, y), ch, font=ft, fill=GOLD + (255,))
+        d.text((x, y), ch, font=ft, fill=story.GOLD + (255,))
         x += d.textlength(ch, font=ft) + 5
-    y += 64
+    y += 62
     for line in hl:
         d.text((M, y), line, font=fh, fill=CREAM + (255,))
-        y += 108
-    d.line((M, y + 18, M + 120, y + 18), fill=GOLD + (255,), width=5)
-    d.text((M, y + 50), 'WhatsApp: ' + story.CFG['whatsapp'], font=story.font('Poppins-Medium.ttf', 40),
+        y += 104
+    y += 20
+    y = story.price_block(d, M, y, big=64) + 22
+    d.text((M, y), 'Kesim ücretsiz  •  Kredi kartı  •  Ankara içi eve hizmet',
+           font=story.font('Poppins-Medium.ttf', 30), fill=CREAM + (255,))
+    y += 52
+    d.text((M, y), 'WhatsApp: ' + story.CFG['whatsapp'], font=story.font('Poppins-Bold.ttf', 44),
            fill=CREAM + (255,))
     return ov
 
@@ -83,6 +92,8 @@ def slide_frames(path, xbias, ybias, top, head, n, zoom_in=True):
 
 def build(name):
     spec = json.load(open(os.path.join(ROOT, 'reels', name + '.json'), encoding='utf-8'))
+    tema = spec.get('tema')
+    story.set_tema(tema)
     crop = story.CFG['kirpma']
     seq = []
     for k, (photo, top, head) in enumerate(spec['slaytlar']):
@@ -92,7 +103,8 @@ def build(name):
     photo, lab, head, body = spec['kapanis']
     xb, yb = crop.get(photo, [0.5, 0.35])
     endp = os.path.join(ROOT, 'reels', name + '_kapanis.jpg')
-    story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb)
+    story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb, tema=tema)
+    story.set_tema(tema)
     end = np.asarray(Image.open(endp).convert('RGB'))
     seq.append([end] * int(LAST * FPS))
 

@@ -2,64 +2,640 @@
   "eski_fiyat": "6.000 TL",
   "yeni_fiyat": "5.000 TL",
   "fiyat_ek": "'den başlayan fiyatlarla",
-  "etiketler": ["Kesim ücretsiz", "Kredi kartı geçerli"],
-  "whatsapp": "0533 778 83 03",
-  "kirpma": {"foto04.jpg": [0.15, 0.35], "foto07.jpg": [0.15, 0.35], "foto11.jpg": [0.5, 0.35]},
-  "reels_muzik": ["974997722832438", "688562900176070"],
-
-  "program": [
-    {"ad": "sabah", "tur": "story", "saat": "08:00", "gunler": ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"]},
-    {"ad": "aksam", "tur": "story", "saat": "20:00", "gunler": ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"]},
-    {"ad": "reels", "tur": "reels", "saat": "19:00", "gunler": ["Salı", "Perşembe", "Cumartesi"]}
+  "etiketler": [
+    "Kesim ücretsiz",
+    "Kredi kartı geçerli",
+    "Ankara içi eve hizmet"
   ],
-
+  "whatsapp": "0533 778 83 03",
+  "kirpma": {
+    "foto04.jpg": [
+      0.15,
+      0.35
+    ],
+    "foto07.jpg": [
+      0.15,
+      0.35
+    ],
+    "foto11.jpg": [
+      0.5,
+      0.35
+    ]
+  },
+  "reels_muzik": [
+    "974997722832438",
+    "688562900176070"
+  ],
+  "program": [
+    {
+      "ad": "sabah",
+      "tur": "story",
+      "saat": "07:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "yetisen",
+      "tur": "story",
+      "saat": "09:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "yetisen",
+      "tur": "story",
+      "saat": "10:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "yetisen",
+      "tur": "story",
+      "saat": "11:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "firsat",
+      "tur": "story",
+      "saat": "12:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "hizmet",
+      "tur": "story",
+      "saat": "13:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "reels",
+      "tur": "reels",
+      "saat": "13:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "sukur",
+      "tur": "story",
+      "saat": "15:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "sukur",
+      "tur": "story",
+      "saat": "16:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "guven",
+      "tur": "story",
+      "saat": "17:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "guven",
+      "tur": "story",
+      "saat": "19:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "reels",
+      "tur": "reels",
+      "saat": "20:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "ihtiyac",
+      "tur": "story",
+      "saat": "21:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    },
+    {
+      "ad": "gece",
+      "tur": "story",
+      "saat": "23:00",
+      "gunler": [
+        "Pazartesi",
+        "Salı",
+        "Çarşamba",
+        "Perşembe",
+        "Cuma",
+        "Cumartesi",
+        "Pazar"
+      ]
+    }
+  ],
   "sabah": [
-    ["Günaydın", "Hayırlı sabahlar", "Bereketli bir gün dileriz. Adak, akika ve şükür kurbanlarınız için hizmetinizdeyiz."],
-    ["Günaydın", "Güne bereketle başlayın", "Adak, akika ve şükür kurbanı talepleriniz için WhatsApp hattımızdan bize yazabilirsiniz."],
-    ["Günaydın", "Hayırlı ve bereketli bir gün", "Sağlıklı hayvanlarımızla adağınızı zamanında kesip teslim ediyoruz."],
-    ["Günaydın", "Niyetiniz bize emanettir", "Adak, akika ve şükür kurbanlarınızı İslami usullere uygun şekilde kesip teslim ediyoruz."],
-    ["Günaydın", "Hayırlı işler dileriz", "Kurbanınız için gün ve saat belirleyin, gerisini bize bırakın."],
-    ["Günaydın", "Yeni güne şükürle", "Şükür kurbanınızı sizin için kesip teslim ediyoruz."],
-    ["Günaydın", "Hayırlı sabahlar", "Dilerseniz adağınızı sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."]
+    [
+      "Günaydın",
+      "Hayırlı sabahlar",
+      ""
+    ],
+    [
+      "Günaydın",
+      "Güne bereketle başlayın",
+      ""
+    ],
+    [
+      "Günaydın",
+      "Hayırlı ve bereketli bir gün",
+      ""
+    ],
+    [
+      "Günaydın",
+      "Yeni güne şükürle",
+      ""
+    ],
+    [
+      "Günaydın",
+      "Hayırlı işler dileriz",
+      ""
+    ],
+    [
+      "Günaydın",
+      "Bereketli bir sabah dileriz",
+      ""
+    ],
+    [
+      "Günaydın",
+      "Güzel bir güne merhaba",
+      ""
+    ]
   ],
   "sabah_cuma": [
-    ["Hayırlı Cumalar", "Cumanız mübarek olsun", "Rabbim niyetlerinizi kabul, dualarınızı makbul eylesin."],
-    ["Hayırlı Cumalar", "Dualarınız kabul olsun", "Mübarek Cuma gününüz hayırlara vesile olsun."],
-    ["Hayırlı Cumalar", "Bereketli bir Cuma dileriz", "Adak ve şükür kurbanlarınızla hayırlarınıza vesile olmaktan onur duyuyoruz."],
-    ["Hayırlı Cumalar", "Allah kabul etsin", "Mübarek Cuma gününde bize emanet edilen her niyet için teşekkür ederiz."]
+    [
+      "Hayırlı Cumalar",
+      "Cumanız mübarek olsun",
+      "Rabbim niyetlerinizi kabul, dualarınızı makbul eylesin."
+    ],
+    [
+      "Hayırlı Cumalar",
+      "Dualarınız kabul olsun",
+      "Mübarek Cuma gününüz hayırlara vesile olsun."
+    ],
+    [
+      "Hayırlı Cumalar",
+      "Bereketli bir Cuma dileriz",
+      "Adak ve şükür kurbanlarınızla hayırlarınıza vesile olmaktan onur duyuyoruz."
+    ],
+    [
+      "Hayırlı Cumalar",
+      "Allah kabul etsin",
+      "Mübarek Cuma gününde bize emanet edilen her niyet için teşekkür ederiz."
+    ]
   ],
-  "aksam": [
-    ["Can Besicilik", "Niyetiniz bize emanettir", "Adak, akika ve şükür kurbanlarınızı İslami usullere uygun şekilde kesip teslim ediyor, dilerseniz ihtiyaç sahiplerine ulaştırıyoruz."],
-    ["Teşekkür ederiz", "Güveniniz için teşekkürler", "Bugün bize emanet edilen tüm adaklar için teşekkür ederiz. Allah kabul etsin."],
-    ["Can Besicilik", "İslami usullere uygun kesim", "Her kesim titizlikle, temizlik ve hijyen kurallarına uygun olarak gerçekleştirilir."],
-    ["Adak kurbanı", "Adağınızı geciktirmeyin", "Adak, akika ve şükür kurbanı talepleriniz için WhatsApp hattımızdan bize ulaşabilirsiniz."],
-    ["İhtiyaç sahiplerine", "Paylaştıkça bereket artar", "Adaklarınızı dilerseniz ihtiyaç sahiplerine sizin adınıza ulaştırıyoruz."],
-    ["Akika kurbanı", "Yeni doğan bebeğiniz için", "Akika kurbanınızı İslami usullere uygun şekilde kesip teslim ediyoruz. Hayırlı uğurlu olsun."],
-    ["Özel indirim", "Birden fazla alımda özel fiyat", "Birden fazla adak, akika veya şükür kurbanı için bizi arayın, size özel fiyat verelim."],
-    ["Şükür kurbanı", "Şükrünüzü paylaşın", "Sevinçli günlerinizde şükür kurbanınızı sizin için kesip teslim ediyoruz."],
-    ["Can Besicilik", "Sağlıklı hayvan, uygun fiyat", "Seçilmiş sağlıklı hayvanlarımızla adağınızı zamanında kesip teslim ediyoruz."],
-    ["Yeni siparişler", "Planınızı şimdiden yapın", "Adak, akika ve şükür kurbanı için önceden sipariş verebilir, gün ve saat belirleyebilirsiniz."],
-    ["Teşekkür ederiz", "Allah kabul etsin", "Bize emanet edilen tüm niyetler için teşekkür eder, hayırlı akşamlar dileriz."]
-  ],
-
   "reels": [
-    {"slaytlar": [["Can Besicilik", "Adak, akika ve şükür kurbanı"], ["Sağlıklı hayvanlar", "Özenle seçilmiş, bakımlı"], ["Uygun fiyat", "5.000 TL'den başlayan fiyatlar"], ["Paylaştıkça bereket", "İhtiyaç sahiplerine ulaştırıyoruz"]],
-     "kapanis": ["Can Besicilik", "Niyetiniz bize emanettir", "İslami usullere uygun kesim, zamanında teslim."],
-     "aciklama": "Adak, akika, şükür ve kurban için güvenilir adres: Can Besicilik 🐑\n\n✅ Sağlıklı, özenle seçilmiş hayvanlar\n✅ 5.000 TL'den başlayan fiyatlar\n✅ Kesim ücretsiz, kredi kartı geçerli\n✅ Dilerseniz ihtiyaç sahiplerine ulaştırıyoruz\n\n📲 WhatsApp sipariş hattı: 0533 778 83 03\n\n#adak #akika #şükürkurbanı #kurban #adaklık #canbesicilik #ankara"},
-    {"slaytlar": [["Hayvanlarımız", "Her gün özenle bakılıyor"], ["Can Besicilik", "Sağlıklı ve bakımlı"], ["Adağınıza uygun", "Doğru hayvanı birlikte seçelim"], ["Kesim ücretsiz", "Kredi kartı geçerli"]],
-     "kapanis": ["Can Besicilik", "Siparişiniz için bize yazın", "Adak, akika ve şükür kurbanınızı kesip teslim ediyoruz."],
-     "aciklama": "Hayvanlarımız her gün özenle bakılıyor 🐑🐐\n\nAdak, akika veya şükür kurbanınız için size uygun hayvanı birlikte seçelim.\n✅ Kesim ücretsiz\n✅ Kredi kartı geçerli\n✅ 5.000 TL'den başlayan fiyatlar\n\n📲 WhatsApp sipariş hattı: 0533 778 83 03\n\n#adak #akika #kurbanlık #adaklık #koyun #canbesicilik #ankara"},
-    {"slaytlar": [["Akika kurbanı", "Yeni doğan bebeğiniz için"], ["Sünnete uygun", "İslami usullere uygun kesim"], ["Can Besicilik", "Kesip teslim ediyoruz"]],
-     "kapanis": ["Akika kurbanı", "Hayırlı uğurlu olsun", "Bebeğinizin akikası için bize WhatsApp'tan yazın."],
-     "aciklama": "Yeni doğan bebeğiniz için akika kurbanı 👶🤲\n\nAkika kurbanınızı İslami usullere uygun şekilde kesip teslim ediyoruz. Dilerseniz etini ihtiyaç sahiplerine ulaştırıyoruz.\n✅ Kesim ücretsiz • Kredi kartı geçerli\n\n📲 WhatsApp: 0533 778 83 03\n\n#akika #akikakurbanı #adak #canbesicilik #ankara"},
-    {"slaytlar": [["Özel indirim", "Birden fazla alımda özel fiyat"], ["Adak • Şükür • Akika", "5.000 TL'den başlayan fiyatlar"], ["Hemen arayın", "Yerimize bekleriz"]],
-     "kapanis": ["Özel indirim", "Birden fazla alımda indirim", "Toplu adak ve şükür kurbanları için bizi arayın."],
-     "aciklama": "Birden fazla alımda özel indirim! 🎯\n\nAdak, şükür ve akika kurbanlarınız için 5.000 TL'den başlayan fiyatlarla hizmetinizdeyiz. Toplu alımlarda size özel fiyat için hemen arayın.\n\n📲 0533 778 83 03\n\n#adak #şükürkurbanı #akika #adaklık #canbesicilik #ankara"},
-    {"slaytlar": [["İhtiyaç sahiplerine", "Adağınız yerini bulsun"], ["Paylaştıkça bereket", "Sizin adınıza ulaştırıyoruz"], ["Can Besicilik", "Niyetiniz bize emanet"]],
-     "kapanis": ["İhtiyaç sahiplerine", "Adağınız yerini bulsun", "Kurbanınızı dilerseniz sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."],
-     "aciklama": "Adağınız yerini bulsun 🤲\n\nDilerseniz adak ve şükür kurbanınızı sizin adınıza kesip ihtiyaç sahiplerine ulaştırıyoruz.\n\n📲 WhatsApp: 0533 778 83 03\n\n#adak #sadaka #şükürkurbanı #canbesicilik #ankara"},
-    {"slaytlar": [["Şükür kurbanı", "Sevinçli günlerinizde"], ["Can Besicilik", "Şükrünüzü paylaşın"], ["Uygun fiyat", "5.000 TL'den başlayan fiyatlar"]],
-     "kapanis": ["Şükür kurbanı", "Şükrünüzü paylaşın", "Şükür kurbanınızı sizin için kesip teslim ediyoruz."],
-     "aciklama": "Sevinçli günlerinizde şükür kurbanı 🤲\n\nYeni ev, yeni iş, sağlık, sınav başarısı… Şükür kurbanınızı sizin için kesip teslim ediyoruz.\n✅ Kesim ücretsiz • Kredi kartı geçerli\n\n📲 WhatsApp: 0533 778 83 03\n\n#şükürkurbanı #adak #canbesicilik #ankara"}
+    {
+      "slaytlar": [
+        [
+          "Can Besicilik",
+          "Adak, akika ve şükür kurbanı"
+        ],
+        [
+          "Sağlıklı hayvanlar",
+          "Özenle seçilmiş, bakımlı"
+        ],
+        [
+          "Uygun fiyat",
+          "5.000 TL'den başlayan fiyatlar"
+        ],
+        [
+          "Paylaştıkça bereket",
+          "İhtiyaç sahiplerine ulaştırıyoruz"
+        ]
+      ],
+      "kapanis": [
+        "Can Besicilik",
+        "Niyetiniz bize emanettir",
+        "İslami usullere uygun kesim, zamanında teslim."
+      ],
+      "aciklama": "Adak, akika, şükür ve kurban için güvenilir adres: Can Besicilik 🐑\n\n✅ Sağlıklı, özenle seçilmiş hayvanlar\n✅ 5.000 TL'den başlayan fiyatlar\n✅ Kesim ücretsiz, kredi kartı geçerli\n✅ Dilerseniz ihtiyaç sahiplerine ulaştırıyoruz\n\n📲 WhatsApp sipariş hattı: 0533 778 83 03\n\n#adak #akika #şükürkurbanı #kurban #adaklık #canbesicilik #ankara"
+    },
+    {
+      "slaytlar": [
+        [
+          "Hayvanlarımız",
+          "Her gün özenle bakılıyor"
+        ],
+        [
+          "Can Besicilik",
+          "Sağlıklı ve bakımlı"
+        ],
+        [
+          "Adağınıza uygun",
+          "Doğru hayvanı birlikte seçelim"
+        ],
+        [
+          "Kesim ücretsiz",
+          "Kredi kartı geçerli"
+        ]
+      ],
+      "kapanis": [
+        "Can Besicilik",
+        "Siparişiniz için bize yazın",
+        "Adak, akika ve şükür kurbanınızı kesip teslim ediyoruz."
+      ],
+      "aciklama": "Hayvanlarımız her gün özenle bakılıyor 🐑🐐\n\nAdak, akika veya şükür kurbanınız için size uygun hayvanı birlikte seçelim.\n✅ Kesim ücretsiz\n✅ Kredi kartı geçerli\n✅ 5.000 TL'den başlayan fiyatlar\n\n📲 WhatsApp sipariş hattı: 0533 778 83 03\n\n#adak #akika #kurbanlık #adaklık #koyun #canbesicilik #ankara"
+    },
+    {
+      "slaytlar": [
+        [
+          "Akika kurbanı",
+          "Yeni doğan bebeğiniz için"
+        ],
+        [
+          "Sünnete uygun",
+          "İslami usullere uygun kesim"
+        ],
+        [
+          "Can Besicilik",
+          "Kesip teslim ediyoruz"
+        ]
+      ],
+      "kapanis": [
+        "Akika kurbanı",
+        "Hayırlı uğurlu olsun",
+        "Bebeğinizin akikası için bize WhatsApp'tan yazın."
+      ],
+      "aciklama": "Yeni doğan bebeğiniz için akika kurbanı 👶🤲\n\nAkika kurbanınızı İslami usullere uygun şekilde kesip teslim ediyoruz. Dilerseniz etini ihtiyaç sahiplerine ulaştırıyoruz.\n✅ Kesim ücretsiz • Kredi kartı geçerli\n\n📲 WhatsApp: 0533 778 83 03\n\n#akika #akikakurbanı #adak #canbesicilik #ankara"
+    },
+    {
+      "slaytlar": [
+        [
+          "Özel indirim",
+          "Birden fazla alımda özel fiyat"
+        ],
+        [
+          "Adak • Şükür • Akika",
+          "5.000 TL'den başlayan fiyatlar"
+        ],
+        [
+          "Hemen arayın",
+          "Yerimize bekleriz"
+        ]
+      ],
+      "kapanis": [
+        "Özel indirim",
+        "Birden fazla alımda indirim",
+        "Toplu adak ve şükür kurbanları için bizi arayın."
+      ],
+      "aciklama": "Birden fazla alımda özel indirim! 🎯\n\nAdak, şükür ve akika kurbanlarınız için 5.000 TL'den başlayan fiyatlarla hizmetinizdeyiz. Toplu alımlarda size özel fiyat için hemen arayın.\n\n📲 0533 778 83 03\n\n#adak #şükürkurbanı #akika #adaklık #canbesicilik #ankara"
+    },
+    {
+      "slaytlar": [
+        [
+          "İhtiyaç sahiplerine",
+          "Adağınız yerini bulsun"
+        ],
+        [
+          "Paylaştıkça bereket",
+          "Sizin adınıza ulaştırıyoruz"
+        ],
+        [
+          "Can Besicilik",
+          "Niyetiniz bize emanet"
+        ]
+      ],
+      "kapanis": [
+        "İhtiyaç sahiplerine",
+        "Adağınız yerini bulsun",
+        "Kurbanınızı dilerseniz sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."
+      ],
+      "aciklama": "Adağınız yerini bulsun 🤲\n\nDilerseniz adak ve şükür kurbanınızı sizin adınıza kesip ihtiyaç sahiplerine ulaştırıyoruz.\n\n📲 WhatsApp: 0533 778 83 03\n\n#adak #sadaka #şükürkurbanı #canbesicilik #ankara"
+    },
+    {
+      "slaytlar": [
+        [
+          "Şükür kurbanı",
+          "Sevinçli günlerinizde"
+        ],
+        [
+          "Can Besicilik",
+          "Şükrünüzü paylaşın"
+        ],
+        [
+          "Uygun fiyat",
+          "5.000 TL'den başlayan fiyatlar"
+        ]
+      ],
+      "kapanis": [
+        "Şükür kurbanı",
+        "Şükrünüzü paylaşın",
+        "Şükür kurbanınızı sizin için kesip teslim ediyoruz."
+      ],
+      "aciklama": "Sevinçli günlerinizde şükür kurbanı 🤲\n\nYeni ev, yeni iş, sağlık, sınav başarısı… Şükür kurbanınızı sizin için kesip teslim ediyoruz.\n✅ Kesim ücretsiz • Kredi kartı geçerli\n\n📲 WhatsApp: 0533 778 83 03\n\n#şükürkurbanı #adak #canbesicilik #ankara"
+    }
+  ],
+  "kampanya": {
+    "serit": "BÜYÜK KAMPANYADA SON GÜNLER!",
+    "uyari": "Her şey pahalanıyor, adaklıklar yerinde kalmıyor. Adağınız varsa fiyatlar yükselmeden alın!",
+    "guven": [
+      "Veteriner kontrollü Aksaray yaylım hayvanı",
+      "Sağlıklı, adaklık yaşını tutan kurbanlıklar"
+    ],
+    "aciklama_ek": "🔥 Büyük kampanyada son günler! Her şey pahalanıyor, adaklıklar yerinde kalmıyor. Adağınız varsa fiyatlar yükselmeden alın.\n\n💰 5.000 TL'den başlayan fiyatlar\n✅ Veteriner kontrollü Aksaray yaylım hayvanı\n✅ Sağlıklı, adaklık yaşını tutan kurbanlıklar\n✅ Kesim ücretsiz • Kredi kartı geçerli • Ankara içi eve hizmet\n\n"
+  },
+  "yetisen": [
+    [
+      "Yetişen alıyor",
+      "Adaklıklar hızla tükeniyor",
+      ""
+    ],
+    [
+      "Yetişen alıyor",
+      "Son adaklıklarımız",
+      ""
+    ],
+    [
+      "Yetişen alıyor",
+      "Fırsatı kaçırmayın",
+      ""
+    ],
+    [
+      "Yetişen alıyor",
+      "Bugün gelin, seçin",
+      ""
+    ],
+    [
+      "Yetişen alıyor",
+      "Sayılı adaklık kaldı",
+      ""
+    ],
+    [
+      "Yetişen alıyor",
+      "Erken gelen seçer",
+      ""
+    ],
+    [
+      "Yetişen alıyor",
+      "Fiyatlar artmadan yetişin",
+      ""
+    ]
+  ],
+  "hizmet": [
+    [
+      "Adak ve akika",
+      "Adağınızı kesip teslim ediyoruz",
+      ""
+    ],
+    [
+      "Akika kurbanı",
+      "Yeni doğan bebeğiniz için",
+      ""
+    ],
+    [
+      "Adak kurbanı",
+      "İslami usullere uygun kesim",
+      ""
+    ],
+    [
+      "Ankara içi",
+      "Eve kadar teslim",
+      ""
+    ],
+    [
+      "Adak ve akika",
+      "Gün ve saati siz belirleyin",
+      ""
+    ]
+  ],
+  "sukur": [
+    [
+      "Şükür kurbanı",
+      "Şükrünüzü paylaşın",
+      ""
+    ],
+    [
+      "Şükür kurbanı",
+      "Sevinçli günlerinizde",
+      ""
+    ],
+    [
+      "Şükür kurbanı",
+      "Yeni ev, yeni iş, sağlık…",
+      ""
+    ],
+    [
+      "Şükür kurbanı",
+      "Nimete şükür, kurbanla",
+      ""
+    ],
+    [
+      "Şükür kurbanı",
+      "Şükrünüzü kurbanla taçlandırın",
+      ""
+    ],
+    [
+      "Şükür kurbanı",
+      "Hayırlı haberlerin şükrü",
+      ""
+    ]
+  ],
+  "guven": [
+    [
+      "Güven veriyoruz",
+      "Niyetiniz bize emanettir",
+      ""
+    ],
+    [
+      "Güven veriyoruz",
+      "Veteriner kontrollü hayvanlar",
+      ""
+    ],
+    [
+      "Güven veriyoruz",
+      "Aksaray yaylım hayvanı",
+      ""
+    ],
+    [
+      "Güven veriyoruz",
+      "Adaklık yaşını tutan kurbanlıklar",
+      ""
+    ],
+    [
+      "Güven veriyoruz",
+      "Yıllardır aynı yerde",
+      ""
+    ],
+    [
+      "Güven veriyoruz",
+      "Gözünüz arkada kalmasın",
+      ""
+    ]
+  ],
+  "ihtiyac": [
+    [
+      "İhtiyaç sahiplerine",
+      "Adağınız yerini bulsun",
+      ""
+    ],
+    [
+      "İhtiyaç sahiplerine",
+      "Paylaştıkça bereket artar",
+      ""
+    ],
+    [
+      "İhtiyaç sahiplerine",
+      "Sizin adınıza ulaştırıyoruz",
+      ""
+    ],
+    [
+      "İhtiyaç sahiplerine",
+      "Hayrınız yerini bulsun",
+      ""
+    ]
+  ],
+  "gece": [
+    [
+      "Hayırlı geceler",
+      "Huzurlu bir gece dileriz",
+      ""
+    ],
+    [
+      "Hayırlı geceler",
+      "Allah kabul etsin",
+      ""
+    ],
+    [
+      "Hayırlı geceler",
+      "Güveniniz için teşekkürler",
+      ""
+    ],
+    [
+      "Hayırlı geceler",
+      "Yarın da hizmetinizdeyiz",
+      ""
+    ],
+    [
+      "Hayırlı geceler",
+      "Rabbim niyetlerinizi kabul etsin",
+      ""
+    ]
+  ],
+  "firsat": [
+    [
+      "Kampanya",
+      "Fiyatlar yükselmeden alın",
+      ""
+    ],
+    [
+      "Kampanya",
+      "Son günler fiyatı",
+      ""
+    ],
+    [
+      "Kampanya",
+      "Birden fazla alımda özel fiyat",
+      ""
+    ],
+    [
+      "Kampanya",
+      "Bu fiyat kaçmaz",
+      ""
+    ],
+    [
+      "Kampanya",
+      "Adağınızı bugün ayırtın",
+      ""
+    ]
   ]
 }
