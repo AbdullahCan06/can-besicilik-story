@@ -37,6 +37,7 @@ def main():
     ap.add_argument('pazartesi')
     ap.add_argument('--gun', help='yalnızca bu tarih (YYYY-MM-DD)')
     ap.add_argument('--sadece', help='yalnızca bu slot adı (sabah/aksam/reels)')
+    ap.add_argument('--saat', help='yalnızca bu saat (HH:MM)')
     a = ap.parse_args()
 
     cfg = story.CFG
@@ -68,6 +69,28 @@ def main():
     for s in cfg['program']:
         per_day[s['ad']] = per_day.get(s['ad'], 0) + 1
     seen = {}
+
+    # Reels sırası: güne bağlı Reels (ör. "gun": "Cuma") yalnızca o günün ilk Reels'inde çıkar.
+    # O slotun normal sırası, güne bağlı Reels'e denk gelen slota verilir (haftada tekrar olmaz).
+    reels_pool = cfg['reels']
+    reel_idx = {}
+    rc = {}
+    for k, (i, gun, s) in enumerate(slots):
+        if s['tur'] != 'story':
+            n = rc.get(s['ad'], 0)
+            rc[s['ad']] = n + 1
+            reel_idx[k] = (n, (week * len(s['gunler']) + n) % len(reels_pool))
+    for bi, bspec in enumerate(reels_pool):
+        bgun = bspec.get('gun')
+        if not bgun:
+            continue
+        hedef = next((k for k, (i, gun, s) in enumerate(slots) if k in reel_idx and gun == bgun), None)
+        for k in reel_idx:
+            if k != hedef and reel_idx[k][1] == bi:
+                reel_idx[k] = (reel_idx[k][0], reel_idx[hedef][1] if hedef is not None else (bi + 1) % len(reels_pool))
+        if hedef is not None:
+            reel_idx[hedef] = (reel_idx[hedef][0], bi)
+
     for k, (i, gun, s) in enumerate(slots):
         day = monday + dt.timedelta(days=i)
         need = 4 if s['tur'] == 'reels' else 1
@@ -83,6 +106,8 @@ def main():
         if a.gun and day.isoformat() != a.gun:
             continue
         if a.sadece and s['ad'] != a.sadece:
+            continue
+        if a.saat and s['saat'] != a.saat:
             continue
         tarih = f"{day.isoformat()}T{s['saat']}:00"
         tema = story.TEMA_SIRASI[(week + k) % len(story.TEMA_SIRASI)]
@@ -106,9 +131,8 @@ def main():
                            ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
-            n = rcount.get(s['ad'], 0)
-            rcount[s['ad']] = n + 1
-            spec = cfg['reels'][(week * len(s['gunler']) + n) % len(cfg['reels'])]
+            n, ridx = reel_idx[k]
+            spec = reels_pool[ridx]
             sl = spec['slaytlar']
             src = my_vids if my_vids else my_photos[:need]
             js = {'slaytlar': [[src[j % len(src)], t, h] for j, (t, h) in enumerate(sl)],
