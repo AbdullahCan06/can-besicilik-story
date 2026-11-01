@@ -125,10 +125,12 @@ def main():
                                   tema=tema, v=week * 211 + k)
             else:
                 p = my_photos[0]
-                xb, yb = crop.get(p, [0.5, 0.35])
+                kr = crop.get(p, [0.5, 0.35])
+                xb, yb = kr[0], kr[1]
+                wyb = kr[2] if len(kr) > 2 else 0.55   # 3. değer: fotoğraf penceresinin dikey konumu (0 üst, 1 alt)
                 out = os.path.join('stories', stamp + '.jpg')
                 story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
-                           ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)
+                           ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
             n, ridx = reel_idx[k]

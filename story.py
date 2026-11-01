@@ -154,26 +154,12 @@ def variant(v):
     return k
 
 
-def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None):
+def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None, wybias=0.55, yerlesim=None):
+    mod = yerlesim or CFG.get('yerlesim', 'pencere')
     set_tema(tema)
     kamp = variant(v)
     src = photo if isinstance(photo, Image.Image) else Image.open(photo)
-    base = cover(src, W, H, ybias, xbias)
-
-    b0 = H * (0.20 if kamp else 0.28)
-    grad = Image.new('L', (1, H))
-    for y in range(H):
-        top = max(0, 1 - y / 520) * 170
-        bot = 0 if y < b0 else min(1, (y - b0) / (H * 0.24)) ** 1.2 * 248
-        grad.putpixel((0, y), int(max(top, bot)))
-    grad = grad.resize((W, H))
-    base = Image.composite(Image.new('RGB', (W, H), GREEN), base, grad)
-
-    base, ly = logo_disc(base, 170 if kamp else 230, 175)
-    d = ImageDraw.Draw(base)
-    if kamp.get('serit'):
-        ribbon(d, ly + 22, kamp['serit'])
-
+    d = ImageDraw.Draw(Image.new('RGB', (W, H)))  # yalnızca ölçü için
     M = 72
     fl = font('Poppins-Medium.ttf', 32)
     fh = font('Poppins-Bold.ttf', 80)
@@ -191,6 +177,31 @@ def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=
     total = (40 + 16 + len(hl) * 92 + 18 + len(bl) * 54 + len(ul) * 48 + 26 + 124 + 24 + chip_end + 22
              + len(guven) * 50 + 14 + WA_H)
     y = 1700 - total
+
+    if mod == 'pencere':
+        # Fotoğraf yazının üstünde kalan alana sığdırılır; alttaki hayvanlar görünsün diye
+        # fotoğrafın alt-orta kısmı seçilir (kirpma'daki ybias ile ayarlanabilir).
+        hw = min(H, y + 140)
+        win = cover(src, W, hw, wybias, xbias)
+        base = Image.new('RGB', (W, H), GREEN)
+        base.paste(win, (0, 0))
+        f0, f1 = y - 260, y + 40
+    else:
+        base = cover(src, W, H, ybias, xbias)
+        f0, f1 = H * (0.20 if kamp else 0.28), H * (0.20 if kamp else 0.28) + H * 0.24
+    grad = Image.new('L', (1, H))
+    for yy in range(H):
+        top = max(0, 1 - yy / 520) * 170
+        bot = 0 if yy < f0 else min(1, (yy - f0) / (f1 - f0)) ** 1.2 * 248
+        if yy >= f1:
+            bot = 255 if mod == 'pencere' else bot
+        grad.putpixel((0, yy), int(max(top, bot)))
+    grad = grad.resize((W, H))
+    base = Image.composite(Image.new('RGB', (W, H), GREEN), base, grad)
+    base, ly = logo_disc(base, 170 if kamp else 230, 175)
+    d = ImageDraw.Draw(base)
+    if kamp.get('serit'):
+        ribbon(d, ly + 22, kamp['serit'])
 
     x = M
     for ch in label.upper():
@@ -233,9 +244,9 @@ def overlay_png(label, headline, out, tema=None, v=None):
     """Story yazı katmanını şeffaf PNG olarak üretir (videonun üstüne bindirmek için).
     Siyah ve beyaz zemin üzerinde iki kez çizip farkından saydamlığı hesaplar."""
     import numpy as np
-    a = np.asarray(make(Image.new('RGB', (W, H), (0, 0, 0)), label, headline, '', None, tema=tema, v=v),
+    a = np.asarray(make(Image.new('RGB', (W, H), (0, 0, 0)), label, headline, '', None, tema=tema, v=v, yerlesim='tam'),
                    dtype=np.float32)
-    b = np.asarray(make(Image.new('RGB', (W, H), (255, 255, 255)), label, headline, '', None, tema=tema, v=v),
+    b = np.asarray(make(Image.new('RGB', (W, H), (255, 255, 255)), label, headline, '', None, tema=tema, v=v, yerlesim='tam'),
                    dtype=np.float32)
     alpha = 1.0 - (b - a).mean(axis=2) / 255.0
     alpha = np.clip(alpha, 0, 1)
