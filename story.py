@@ -413,6 +413,8 @@ def video_story(video, label, headline, out, tema=None, v=None, sure=10):
     import hareket
     if sade_aktif() and hareket.ayar():
         hareket.videoya_ekle(out)
+    import reel
+    reel.normalize(out)
 
 
 if __name__ == '__main__':

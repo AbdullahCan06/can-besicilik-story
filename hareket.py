@@ -103,6 +103,8 @@ def foto_video(photo_img, overlay_rgba, out, sure=10, varyant=None):
                     '-movflags', '+faststart', out], check=True)
     import shutil
     shutil.rmtree(tmp)
+    import reel
+    reel.normalize(out)
 
 
 def videoya_ekle(path):

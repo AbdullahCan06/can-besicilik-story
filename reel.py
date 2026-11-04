@@ -184,6 +184,22 @@ def build(name):
     print(out, file=sys.stderr)
 
 
+# Instagram/Facebook'un sorunsuz işlemesi için tek tip çıkış: H.264 High, yuv420p, 30 fps CFR,
+# BT.709 renk etiketi, sabit GOP, AAC 48 kHz. (Telefon videoları HLG/BT.2020 geliyor; kapanış
+# kartıyla birleşince akış ortasında format değişiyor ve Meta 'Video Transcoding Fatal' veriyordu.)
+VF_NORM = 'setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv,format=yuv420p,fps=30'
+ENC_NORM = ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '21', '-profile:v', 'high', '-level', '4.1',
+            '-g', '60', '-keyint_min', '60', '-sc_threshold', '0',
+            '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709',
+            '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-ac', '2', '-movflags', '+faststart']
+
+
+def normalize(path):
+    tmp = path[:-4] + '_norm.mp4'
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-vf', VF_NORM] + ENC_NORM + [tmp], check=True)
+    os.replace(tmp, path)
+
+
 def _etiket(path):
     import hareket
     if story.sade_aktif() and hareket.ayar():
@@ -199,8 +215,7 @@ def add_music(path):
     tmp = path[:-4] + '_tmp.mp4'
     muzik.make(wav, dur, varyant=os.path.basename(path))
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-i', wav, '-map', '0:v', '-map', '1:a',
-                    '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', tmp],
-                   check=True)
+                    '-vf', VF_NORM] + ENC_NORM + ['-shortest', tmp], check=True)
     os.replace(tmp, path)
     os.remove(wav)
 
