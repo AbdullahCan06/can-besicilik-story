@@ -180,7 +180,7 @@ def _fit(d, text, name, size, maxw, lines=1, minsize=26):
     return f, wrap(d, text, f, maxw)
 
 
-def sade_overlay(headline, v=None, tema=None):
+def sade_overlay(headline, v=None, tema=None, hareketli=None):
     """Sade şablonun şeffaf yazı katmanı (RGBA)."""
     if tema:
         set_tema(tema)
@@ -190,11 +190,22 @@ def sade_overlay(headline, v=None, tema=None):
     M = 64
     fh, hl = _fit(d, headline, 'Poppins-Bold.ttf', 76, W - 2 * M, lines=2, minsize=56)
     hiz = '  •  '.join(CFG['etiketler'])
-    fz, _ = _fit(d, hiz, 'Poppins-Medium.ttf', 32, W - 2 * M, lines=1, minsize=24)
+    fz, hzl = _fit(d, hiz, 'Poppins-Medium.ttf', 32, W - 2 * M, lines=1, minsize=28)
+    if len(hzl) > 1:   # sığmazsa maddeleri bölmeden iki satıra dağıt
+        fz = font('Poppins-Medium.ttf', 30)
+        hzl, cur = [], ''
+        for it in CFG['etiketler']:
+            t = (cur + '  •  ' + it) if cur else it
+            if cur and d.textlength(t, font=fz) > W - 2 * M:
+                hzl.append(cur)
+                t = it
+            cur = t
+        hzl.append(cur)
     lh = int(fh.size * 1.16)
     PH = 72 + 34
-    hareketli = bool((CFG.get('hareketli_etiketler') or {}).get('aktif'))
-    bh = 64 + len(hl) * lh + 22 + PH + (30 if hareketli else 26 + fz.size + 30) + 56 + 76
+    if hareketli is None:
+        hareketli = bool((CFG.get('hareketli_etiketler') or {}).get('aktif'))
+    bh = 64 + len(hl) * lh + 22 + PH + (30 if hareketli else 26 + len(hzl) * int(fz.size * 1.3) + 26) + 56 + 76
     y0 = H - bh
     ov.paste(Image.new('RGBA', (W, H), GREEN + (255,)), (0, 0), _sade_mask(330, y0 - 210, y0 + 80))
     d = ImageDraw.Draw(ov)
@@ -241,8 +252,10 @@ def sade_overlay(headline, v=None, tema=None):
         y += PH + 30
     else:
         y += PH + 26
-        d.text((M, y), hiz, font=fz, fill=(232, 236, 228, 255))
-        y += fz.size + 30
+        for zl in hzl:
+            d.text((M, y), zl, font=fz, fill=(232, 236, 228, 255))
+            y += int(fz.size * 1.3)
+        y += 26
     r = 28
     cx, cyy = M + r, y + r
     d.ellipse((cx - r, cyy - r, cx + r, cyy + r), fill=(37, 211, 102, 255))
@@ -273,7 +286,7 @@ def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=
         src0 = photo if isinstance(photo, Image.Image) else Image.open(photo)
         src0 = ImageOps.exif_transpose(src0) if not isinstance(photo, Image.Image) else src0
         base = cover(src0, W, H, ybias if CFG.get('kirpma', {}).get(os.path.basename(str(photo))) else 0.5, xbias)
-        base = Image.alpha_composite(base.convert('RGBA'), sade_overlay(headline, v, tema)).convert('RGB')
+        base = Image.alpha_composite(base.convert('RGBA'), sade_overlay(headline, v, tema, hareketli=False)).convert('RGB')
         if out is None:
             return base
         base.save(out, quality=92)

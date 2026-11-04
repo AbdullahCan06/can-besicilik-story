@@ -97,7 +97,7 @@ def main():
         my_photos = [ph[(pcount + j) % len(ph)] for j in range(need + 1)]
         pcount += need + 1
         # videolu mu? Reels her zaman (video varsa); story'lerin yaklaşık üçte biri
-        use_video = bool(vids) and (s['tur'] == 'reels' or k % 3 == 1)
+        use_video = bool(vids) and (s['tur'] == 'reels' or k % 2 == 1)
         my_vids = []
         if use_video:
             nv = 3 if s['tur'] == 'reels' else 1
@@ -129,7 +129,7 @@ def main():
                 xb, yb = kr[0], kr[1]
                 wyb = kr[2] if len(kr) > 2 else 0.55   # 3. değer: fotoğraf penceresinin dikey konumu (0 üst, 1 alt)
                 import hareket
-                if story.sade_aktif() and hareket.ayar():
+                if story.sade_aktif() and hareket.ayar() and hareket.ayar().get('fotograf_story_video'):
                     out = os.path.join('stories', stamp + '.mp4')
                     story.foto_story_video(os.path.join(ROOT, 'fotograflar', p), head, os.path.join(ROOT, out),
                                            ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)

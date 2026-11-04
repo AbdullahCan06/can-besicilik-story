@@ -3,9 +3,9 @@
   "yeni_fiyat": "5.000 TL",
   "fiyat_ek": "'den başlayan fiyatlarla",
   "etiketler": [
+    "Kredi kartı geçerli, komisyonsuz",
     "Kesim ücretsiz",
-    "Kredi kartı geçerli",
-    "Ankara içi eve hizmet"
+    "Ankara içi ücretsiz teslimat"
   ],
   "whatsapp": "0533 778 83 03",
   "kirpma": {
@@ -44,49 +44,7 @@
     {
       "ad": "yetisen",
       "tur": "story",
-      "saat": "09:00",
-      "gunler": [
-        "Pazartesi",
-        "Salı",
-        "Çarşamba",
-        "Perşembe",
-        "Cuma",
-        "Cumartesi",
-        "Pazar"
-      ]
-    },
-    {
-      "ad": "yetisen",
-      "tur": "story",
       "saat": "10:00",
-      "gunler": [
-        "Pazartesi",
-        "Salı",
-        "Çarşamba",
-        "Perşembe",
-        "Cuma",
-        "Cumartesi",
-        "Pazar"
-      ]
-    },
-    {
-      "ad": "yetisen",
-      "tur": "story",
-      "saat": "11:00",
-      "gunler": [
-        "Pazartesi",
-        "Salı",
-        "Çarşamba",
-        "Perşembe",
-        "Cuma",
-        "Cumartesi",
-        "Pazar"
-      ]
-    },
-    {
-      "ad": "firsat",
-      "tur": "story",
-      "saat": "12:00",
       "gunler": [
         "Pazartesi",
         "Salı",
@@ -128,20 +86,6 @@
     {
       "ad": "sukur",
       "tur": "story",
-      "saat": "15:00",
-      "gunler": [
-        "Pazartesi",
-        "Salı",
-        "Çarşamba",
-        "Perşembe",
-        "Cuma",
-        "Cumartesi",
-        "Pazar"
-      ]
-    },
-    {
-      "ad": "sukur",
-      "tur": "story",
       "saat": "16:00",
       "gunler": [
         "Pazartesi",
@@ -156,7 +100,7 @@
     {
       "ad": "guven",
       "tur": "story",
-      "saat": "17:00",
+      "saat": "18:00",
       "gunler": [
         "Pazartesi",
         "Salı",
@@ -168,9 +112,9 @@
       ]
     },
     {
-      "ad": "guven",
+      "ad": "firsat",
       "tur": "story",
-      "saat": "19:00",
+      "saat": "20:00",
       "gunler": [
         "Pazartesi",
         "Salı",
@@ -198,29 +142,22 @@
     {
       "ad": "ihtiyac",
       "tur": "story",
-      "saat": "21:00",
+      "saat": "22:00",
       "gunler": [
         "Pazartesi",
-        "Salı",
         "Çarşamba",
-        "Perşembe",
         "Cuma",
-        "Cumartesi",
         "Pazar"
       ]
     },
     {
       "ad": "gece",
       "tur": "story",
-      "saat": "23:00",
+      "saat": "22:00",
       "gunler": [
-        "Pazartesi",
         "Salı",
-        "Çarşamba",
         "Perşembe",
-        "Cuma",
-        "Cumartesi",
-        "Pazar"
+        "Cumartesi"
       ]
     }
   ],
@@ -1128,7 +1065,8 @@
     "metinler": [
       "KREDİ KARTI GEÇERLİ • KOMİSYONSUZ",
       "KESİM ÜCRETSİZ",
-      "ÜCRETSİZ EVE TESLİMAT"
-    ]
+      "ANKARA İÇİ ÜCRETSİZ TESLİMAT"
+    ],
+    "fotograf_story_video": false
   }
 }
