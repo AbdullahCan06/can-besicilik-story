@@ -22,6 +22,8 @@ CREAM = story.CREAM
 
 def overlay(top, head, v=None):
     """Şeffaf yazı katmanı: üstte logo, ortanın altında yeşil bant üzerinde yazı."""
+    if story.sade_aktif():
+        return story.sade_overlay(head, v)
     ov = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     # alt kısım yeşil geçiş
     grad = Image.new('L', (1, H))

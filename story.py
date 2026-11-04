@@ -154,8 +154,116 @@ def variant(v):
     return k
 
 
+# ---------------------------------------------------------------------------
+# Sade şablon (ayarlar.json "sablon": "sade"): fotoğraf/video tüm ekranı kaplar,
+# üstte küçük logo + kampanya şeridi, altta kısa bir bantta başlık, fiyat,
+# tek satır hizmet bilgisi ve WhatsApp. Hayvanlar ortada açıkça görünür.
+# ---------------------------------------------------------------------------
+def _sade_mask(top_end, bot_start, bot_full):
+    g = Image.new('L', (1, H))
+    for y in range(H):
+        a = max(0.0, 1 - y / top_end) * 140
+        if y > bot_start:
+            a = max(a, min(1.0, (y - bot_start) / (bot_full - bot_start)) ** 1.3 * 238)
+        g.putpixel((0, y), int(a))
+    return g.resize((W, H))
+
+
+def _fit(d, text, name, size, maxw, lines=1, minsize=26):
+    while size > minsize:
+        f = font(name, size)
+        ls = wrap(d, text, f, maxw)
+        if len(ls) <= lines:
+            return f, ls
+        size -= 4
+    f = font(name, minsize)
+    return f, wrap(d, text, f, maxw)
+
+
+def sade_overlay(headline, v=None, tema=None):
+    """Sade şablonun şeffaf yazı katmanı (RGBA)."""
+    if tema:
+        set_tema(tema)
+    kamp = variant(v)
+    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(ov)
+    M = 64
+    fh, hl = _fit(d, headline, 'Poppins-Bold.ttf', 76, W - 2 * M, lines=2, minsize=56)
+    hiz = '  •  '.join(CFG['etiketler'])
+    fz, _ = _fit(d, hiz, 'Poppins-Medium.ttf', 32, W - 2 * M, lines=1, minsize=24)
+    lh = int(fh.size * 1.16)
+    PH = 72 + 34
+    bh = 64 + len(hl) * lh + 22 + PH + 26 + fz.size + 30 + 56 + 76
+    y0 = H - bh
+    ov.paste(Image.new('RGBA', (W, H), GREEN + (255,)), (0, 0), _sade_mask(330, y0 - 210, y0 + 80))
+    d = ImageDraw.Draw(ov)
+
+    # logo (sol üst) + kampanya şeridi
+    L, lx, ly = 130, M, 120
+    lg = Image.open(LOGO).convert('RGB').resize((L, L), Image.LANCZOS)
+    m = Image.new('L', (L * 4, L * 4), 0)
+    ImageDraw.Draw(m).ellipse((0, 0, L * 4, L * 4), fill=255)
+    m = m.resize((L, L), Image.LANCZOS)
+    d.ellipse((lx - 6, ly - 6, lx + L + 6, ly + L + 6), fill=CREAM + (255,))
+    ov.paste(lg, (lx, ly), m)
+    if kamp.get('serit'):
+        sx = lx + L + 28
+        fs, _ = _fit(d, kamp['serit'], 'Poppins-Bold.ttf', 32, W - sx - M - 52, lines=1, minsize=22)
+        tw = d.textlength(kamp['serit'], font=fs)
+        sh = fs.size + 32
+        sy = ly + (L - sh) // 2
+        d.rounded_rectangle((sx, sy, sx + tw + 52, sy + sh), radius=sh // 2, fill=RED + (255,),
+                            outline=GOLD + (255,), width=3)
+        d.text((sx + 26, sy + sh / 2 + 2), kamp['serit'], font=fs, fill=(255, 255, 255, 255), anchor='lm')
+
+    # alt bant
+    y = y0 + 64
+    for line in hl:
+        d.text((M, y), line, font=fh, fill=CREAM + (255,))
+        y += lh
+    y += 22
+    fo, fn = font('Poppins-Medium.ttf', 34), font('Poppins-Bold.ttf', 72)
+    old, new = CFG['eski_fiyat'], CFG['yeni_fiyat']
+    wo, wn = d.textlength(old, font=fo), d.textlength(new, font=fn)
+    pw = 30 + wo + 20 + wn + 30
+    d.rounded_rectangle((M, y, M + pw, y + PH), radius=PH // 2, fill=GOLD + (255,))
+    cy = y + PH / 2
+    d.text((M + 30, cy), old, font=fo, fill=(92, 74, 40, 255), anchor='lm')
+    d.line((M + 26, cy + 2, M + 34 + wo, cy + 2), fill=(170, 20, 30, 255), width=5)
+    d.text((M + 30 + wo + 20, cy + 4), new, font=fn, fill=GREEN + (255,), anchor='lm')
+    suf = CFG['fiyat_ek'].strip()
+    a, b = suf.rsplit(' ', 1) if ' ' in suf else (suf, '')
+    fs2 = font('Poppins-Medium.ttf', 32)
+    d.text((M + pw + 18, cy - 20), a, font=fs2, fill=CREAM + (255,), anchor='lm')
+    d.text((M + pw + 18, cy + 20), b, font=fs2, fill=CREAM + (255,), anchor='lm')
+    y += PH + 26
+    d.text((M, y), hiz, font=fz, fill=(232, 236, 228, 255))
+    y += fz.size + 30
+    r = 28
+    cx, cyy = M + r, y + r
+    d.ellipse((cx - r, cyy - r, cx + r, cyy + r), fill=(37, 211, 102, 255))
+    d.text((cx, cyy), 'WA', font=font('Poppins-Bold.ttf', 22), fill=(255, 255, 255, 255), anchor='mm')
+    d.text((M + 2 * r + 16, cyy + 2), 'WhatsApp  ' + CFG['whatsapp'], font=font('Poppins-Bold.ttf', 46),
+           fill=CREAM + (255,), anchor='lm')
+    return ov
+
+
+def sade_aktif():
+    return CFG.get('sablon', 'sade') == 'sade'
+
+
 def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None, wybias=0.55, yerlesim=None):
     mod = yerlesim or CFG.get('yerlesim', 'pencere')
+    if sade_aktif() and yerlesim != 'tam':
+        set_tema(tema)
+        src0 = photo if isinstance(photo, Image.Image) else Image.open(photo)
+        src0 = ImageOps.exif_transpose(src0) if not isinstance(photo, Image.Image) else src0
+        base = cover(src0, W, H, ybias if CFG.get('kirpma', {}).get(os.path.basename(str(photo))) else 0.5, xbias)
+        base = Image.alpha_composite(base.convert('RGBA'), sade_overlay(headline, v, tema)).convert('RGB')
+        if out is None:
+            return base
+        base.save(out, quality=92)
+        return
     set_tema(tema)
     kamp = variant(v)
     src = photo if isinstance(photo, Image.Image) else Image.open(photo)
@@ -243,6 +351,9 @@ def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=
 def overlay_png(label, headline, out, tema=None, v=None):
     """Story yazı katmanını şeffaf PNG olarak üretir (videonun üstüne bindirmek için).
     Siyah ve beyaz zemin üzerinde iki kez çizip farkından saydamlığı hesaplar."""
+    if sade_aktif():
+        sade_overlay(headline, v, tema).save(out)
+        return
     import numpy as np
     a = np.asarray(make(Image.new('RGB', (W, H), (0, 0, 0)), label, headline, '', None, tema=tema, v=v, yerlesim='tam'),
                    dtype=np.float32)
