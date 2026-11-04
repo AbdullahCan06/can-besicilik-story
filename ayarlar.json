@@ -1122,5 +1122,13 @@
     "butce_tl": 500,
     "odeyen": "Can Besicilik"
   },
-  "sablon": "sade"
+  "sablon": "sade",
+  "hareketli_etiketler": {
+    "aktif": true,
+    "metinler": [
+      "KREDİ KARTI GEÇERLİ • KOMİSYONSUZ",
+      "KESİM ÜCRETSİZ",
+      "ÜCRETSİZ EVE TESLİMAT"
+    ]
+  }
 }

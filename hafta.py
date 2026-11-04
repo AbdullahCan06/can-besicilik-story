@@ -128,9 +128,15 @@ def main():
                 kr = crop.get(p, [0.5, 0.35])
                 xb, yb = kr[0], kr[1]
                 wyb = kr[2] if len(kr) > 2 else 0.55   # 3. değer: fotoğraf penceresinin dikey konumu (0 üst, 1 alt)
-                out = os.path.join('stories', stamp + '.jpg')
-                story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
-                           ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb)
+                import hareket
+                if story.sade_aktif() and hareket.ayar():
+                    out = os.path.join('stories', stamp + '.mp4')
+                    story.foto_story_video(os.path.join(ROOT, 'fotograflar', p), head, os.path.join(ROOT, out),
+                                           ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)
+                else:
+                    out = os.path.join('stories', stamp + '.jpg')
+                    story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
+                               ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
             n, ridx = reel_idx[k]

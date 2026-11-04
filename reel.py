@@ -130,6 +130,7 @@ def build_video(name, spec):
     out = os.path.join(ROOT, 'reels', name + '.mp4')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lst,
                     '-c', 'copy', '-movflags', '+faststart', out], check=True)
+    _etiket(out)
     add_music(out)
     import shutil
     shutil.rmtree(tmp)
@@ -178,8 +179,15 @@ def build(name):
             p.stdin.write(fr.tobytes())
     p.stdin.close()
     p.wait()
+    _etiket(out)
     add_music(out)
     print(out, file=sys.stderr)
+
+
+def _etiket(path):
+    import hareket
+    if story.sade_aktif() and hareket.ayar():
+        hareket.videoya_ekle(path)
 
 
 def add_music(path):

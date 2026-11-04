@@ -193,7 +193,8 @@ def sade_overlay(headline, v=None, tema=None):
     fz, _ = _fit(d, hiz, 'Poppins-Medium.ttf', 32, W - 2 * M, lines=1, minsize=24)
     lh = int(fh.size * 1.16)
     PH = 72 + 34
-    bh = 64 + len(hl) * lh + 22 + PH + 26 + fz.size + 30 + 56 + 76
+    hareketli = bool((CFG.get('hareketli_etiketler') or {}).get('aktif'))
+    bh = 64 + len(hl) * lh + 22 + PH + (30 if hareketli else 26 + fz.size + 30) + 56 + 76
     y0 = H - bh
     ov.paste(Image.new('RGBA', (W, H), GREEN + (255,)), (0, 0), _sade_mask(330, y0 - 210, y0 + 80))
     d = ImageDraw.Draw(ov)
@@ -236,9 +237,12 @@ def sade_overlay(headline, v=None, tema=None):
     fs2 = font('Poppins-Medium.ttf', 32)
     d.text((M + pw + 18, cy - 20), a, font=fs2, fill=CREAM + (255,), anchor='lm')
     d.text((M + pw + 18, cy + 20), b, font=fs2, fill=CREAM + (255,), anchor='lm')
-    y += PH + 26
-    d.text((M, y), hiz, font=fz, fill=(232, 236, 228, 255))
-    y += fz.size + 30
+    if hareketli:
+        y += PH + 30
+    else:
+        y += PH + 26
+        d.text((M, y), hiz, font=fz, fill=(232, 236, 228, 255))
+        y += fz.size + 30
     r = 28
     cx, cyy = M + r, y + r
     d.ellipse((cx - r, cyy - r, cx + r, cyy + r), fill=(37, 211, 102, 255))
@@ -250,6 +254,16 @@ def sade_overlay(headline, v=None, tema=None):
 
 def sade_aktif():
     return CFG.get('sablon', 'sade') == 'sade'
+
+
+def foto_story_video(photo, headline, out, ybias=0.5, xbias=0.5, tema=None, v=None):
+    """Fotoğraflı story'yi hareketli etiketli 10 sn videoya çevirir (sade şablon)."""
+    import hareket
+    set_tema(tema)
+    src = ImageOps.exif_transpose(Image.open(photo))
+    kr = CFG.get('kirpma', {}).get(os.path.basename(photo))
+    base = cover(src, int(W * 1.0), H, ybias if kr else 0.5, xbias)
+    hareket.foto_video(base, sade_overlay(headline, v, tema), out)
 
 
 def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None, wybias=0.55, yerlesim=None):
@@ -383,6 +397,9 @@ def video_story(video, label, headline, out, tema=None, v=None, sure=10):
                     '-crf', '23', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', out], check=True)
     os.remove(png)
     os.remove(wav)
+    import hareket
+    if sade_aktif() and hareket.ayar():
+        hareket.videoya_ekle(out)
 
 
 if __name__ == '__main__':
