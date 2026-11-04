@@ -112,6 +112,16 @@
       ]
     },
     {
+      "ad": "reels",
+      "tur": "reels",
+      "saat": "18:00",
+      "gunler": [
+        "Perşembe",
+        "Cuma",
+        "Cumartesi"
+      ]
+    },
+    {
       "ad": "firsat",
       "tur": "story",
       "saat": "20:00",

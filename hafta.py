@@ -75,11 +75,12 @@ def main():
     reels_pool = cfg['reels']
     reel_idx = {}
     rc = {}
+    haftalik_reels = sum(1 for _, _, s in slots if s['tur'] != 'story') or 1
     for k, (i, gun, s) in enumerate(slots):
         if s['tur'] != 'story':
             n = rc.get(s['ad'], 0)
             rc[s['ad']] = n + 1
-            reel_idx[k] = (n, (week * len(s['gunler']) + n) % len(reels_pool))
+            reel_idx[k] = (n, (week * haftalik_reels + n) % len(reels_pool))
     for bi, bspec in enumerate(reels_pool):
         bgun = bspec.get('gun')
         if not bgun:
