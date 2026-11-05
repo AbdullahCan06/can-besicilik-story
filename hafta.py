@@ -164,9 +164,6 @@ def main():
             if rk.get('aktif') and gun in rk.get('gunler', []) and s['saat'] == rk.get('saat'):
                 item['reklam_butce'] = rk['butce_tl']
                 item['reklam_odeyen'] = rk['odeyen']
-                # Instagram kütüphane müziği olan Reels öne çıkarılamıyor: reklamlıda videonun
-                # içindeki kendi telifsiz müziğimiz kalır, kütüphane müziği eklenmez.
-                item.pop('muzik', None)
             plan.append(item)
     print(json.dumps(plan, ensure_ascii=False, indent=2))
 
