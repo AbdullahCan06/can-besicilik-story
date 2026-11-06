@@ -1,28 +1,28 @@
 {
  "slaytlar": [
   [
-   "video104.mp4",
-   "Şükür kurbanı",
-   "Sevinçli günlerinizde"
+   "video056.mp4",
+   "Yetişen alıyor",
+   "Adaklıklar tükeniyor"
   ],
   [
-   "video001.mp4",
+   "video057.mp4",
+   "Son günler",
+   "Fiyatlar artmadan gelin"
+  ],
+  [
+   "video058.mp4",
    "Can Besicilik",
-   "Şükrünüzü paylaşın"
-  ],
-  [
-   "video002.mp4",
-   "Uygun fiyat",
-   "5.000 TL'den başlayan fiyatlar"
+   "Hayvanınızı kendiniz seçin"
   ]
  ],
  "kapanis": [
-  "foto070.jpg",
-  "Şükür kurbanı",
-  "Şükrünüzü paylaşın",
-  "Şükür kurbanınızı sizin için kesip teslim ediyoruz."
+  "foto095.jpg",
+  "Yetişen alıyor",
+  "Kaçırmayın",
+  "Adaklıklar tükenmeden yerinizi ayırtın."
  ],
- "tema": "bordo",
- "v": 301,
+ "tema": "lacivert",
+ "v": 224,
  "video": true
 }

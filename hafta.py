@@ -34,18 +34,15 @@ def photos():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('pazartesi')
+    ap.add_argument('pazartesi', help='haftanın ilk günü (YYYY-MM-DD); 7 gün üretilir')
     ap.add_argument('--gun', help='yalnızca bu tarih (YYYY-MM-DD)')
     ap.add_argument('--sadece', help='yalnızca bu slot adı (sabah/aksam/reels)')
     ap.add_argument('--saat', help='yalnızca bu saat (HH:MM)')
     a = ap.parse_args()
 
     cfg = story.CFG
+    # Hafta, verilen başlangıç gününden itibaren 7 gündür (ör. Cumartesi'den Cuma'ya).
     monday = dt.date.fromisoformat(a.pazartesi)
-    monday -= dt.timedelta(days=monday.weekday())
-    if a.gun:
-        g = dt.date.fromisoformat(a.gun)
-        monday = g - dt.timedelta(days=g.weekday())
     week = (monday - EPOCH).days // 7
     ph = photos()
     vids = videos()
@@ -56,7 +53,8 @@ def main():
 
     # Haftadaki tüm slotlar, sabit sırada (fotoğraf sırası buna göre döner)
     slots = []
-    for i, gun in enumerate(GUNLER):
+    for i in range(7):
+        gun = GUNLER[(monday + dt.timedelta(days=i)).weekday()]
         for s in cfg['program']:
             if gun in s['gunler']:
                 slots.append((i, gun, s))
