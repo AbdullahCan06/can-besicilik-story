@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video089.mp4",
+   "video092.mp4",
    "Fiyat",
    "5.000 TL'den başlıyor"
   ],
   [
-   "video090.mp4",
+   "video093.mp4",
    "Her şey pahalanıyor",
    "Bu fiyat kalmaz"
   ],
   [
-   "video091.mp4",
+   "video094.mp4",
    "Hemen gelin",
    "Yerinizi ayırtın"
   ]
  ],
  "kapanis": [
-  "foto076.jpg",
+  "foto080.jpg",
   "Son günler",
   "Fiyatlar artmadan alın",
   "5.000 TL'den başlayan fiyatlarla."
  ],
- "tema": "kahve",
- "v": 255,
+ "tema": "siyah",
+ "sablon": "rozet",
+ "v": 256,
  "video": true
 }

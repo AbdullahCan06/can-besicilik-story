@@ -20,10 +20,11 @@ SLIDE, LAST, FADE = 3.2, 4.0, 0.5
 CREAM = story.CREAM
 
 
-def overlay(top, head, v=None):
+def overlay(top, head, v=None, sablon=None):
     """Şeffaf yazı katmanı: üstte logo, ortanın altında yeşil bant üzerinde yazı."""
     if story.sade_aktif():
-        return story.sade_overlay(head, v)
+        import sablonlar
+        return sablonlar.overlay(sablon or 'sade', head, v, hareketli=True)
     ov = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     # alt kısım yeşil geçiş
     grad = Image.new('L', (1, H))
@@ -76,9 +77,9 @@ def base_photo(path, xbias, ybias, scale=1.12):
     return story.cover(im, int(W * scale), int(H * scale), ybias, xbias)
 
 
-def slide_frames(path, xbias, ybias, top, head, n, zoom_in=True, v=None):
+def slide_frames(path, xbias, ybias, top, head, n, zoom_in=True, v=None, sablon=None):
     big = base_photo(path, xbias, ybias)
-    ov = overlay(top, head, v)
+    ov = overlay(top, head, v, sablon)
     BW, BH = big.size
     for i in range(n):
         t = i / max(1, n - 1)
@@ -101,7 +102,7 @@ def build_video(name, spec):
     for k, (video, top, head) in enumerate(spec['slaytlar']):
         story.set_tema(tema)
         png = os.path.join(tmp, f'k{k}.png')
-        overlay(top, head, (spec.get('v', 0) + k) if 'v' in spec else None).save(png)
+        overlay(top, head, (spec.get('v', 0) + k) if 'v' in spec else None, spec.get('sablon')).save(png)
         seg = os.path.join(tmp, f's{k}.mp4')
         vp = os.path.join(ROOT, 'videolar', video)
         dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
@@ -119,7 +120,7 @@ def build_video(name, spec):
     xb, yb = story.CFG['kirpma'].get(photo, [0.5, 0.35])
     endp = os.path.join(tmp, 'kapanis.jpg')
     story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb, tema=tema,
-               v=(spec['v'] + 5) if 'v' in spec else None)
+               v=(spec['v'] + 5) if 'v' in spec else None, sablon=spec.get('sablon'), hareketli=True)
     seg = os.path.join(tmp, 'son.mp4')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-loop', '1', '-i', endp, '-t', str(LAST),
                     '-vf', f'fps={FPS},format=yuv420p', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '22', seg],
@@ -130,7 +131,7 @@ def build_video(name, spec):
     out = os.path.join(ROOT, 'reels', name + '.mp4')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lst,
                     '-c', 'copy', '-movflags', '+faststart', out], check=True)
-    _etiket(out)
+    _etiket(out, spec.get('sablon'))
     add_music(out)
     import shutil
     shutil.rmtree(tmp)
@@ -149,12 +150,12 @@ def build(name):
         xb, yb = crop.get(photo, [0.5, 0.35])
         seq.append(list(slide_frames(os.path.join(ROOT, 'fotograflar', photo), xb, yb, top, head,
                                      int(SLIDE * FPS), zoom_in=(k % 2 == 0),
-                                     v=(spec.get('v', 0) + k) if 'v' in spec else None)))
+                                     v=(spec.get('v', 0) + k) if 'v' in spec else None, sablon=spec.get('sablon'))))
     photo, lab, head, body = spec['kapanis']
     xb, yb = crop.get(photo, [0.5, 0.35])
     endp = os.path.join(ROOT, 'reels', name + '_kapanis.jpg')
     story.make(os.path.join(ROOT, 'fotograflar', photo), lab, head, body, endp, ybias=yb, xbias=xb, tema=tema,
-               v=(spec['v'] + 5) if 'v' in spec else None)
+               v=(spec['v'] + 5) if 'v' in spec else None, sablon=spec.get('sablon'), hareketli=True)
     story.set_tema(tema)
     end = np.asarray(Image.open(endp).convert('RGB'))
     seq.append([end] * int(LAST * FPS))
@@ -179,7 +180,7 @@ def build(name):
             p.stdin.write(fr.tobytes())
     p.stdin.close()
     p.wait()
-    _etiket(out)
+    _etiket(out, spec.get('sablon'))
     add_music(out)
     print(out, file=sys.stderr)
 
@@ -200,10 +201,11 @@ def normalize(path):
     os.replace(tmp, path)
 
 
-def _etiket(path):
+def _etiket(path, sablon=None):
     import hareket
+    import sablonlar
     if story.sade_aktif() and hareket.ayar():
-        hareket.videoya_ekle(path)
+        hareket.videoya_ekle(path, y=sablonlar.ETIKET_Y.get(sablon or 'sade'))
 
 
 def add_music(path):

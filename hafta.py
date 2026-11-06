@@ -12,6 +12,7 @@ import json
 import os
 
 import reel
+import sablonlar
 import story
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -113,6 +114,7 @@ def main():
             continue
         tarih = f"{day.isoformat()}T{s['saat']}:00"
         tema = story.TEMA_SIRASI[(week + k) % len(story.TEMA_SIRASI)]
+        sablon = sablonlar.sec(week * 3 + k)
         stamp = f"{day.isoformat()}-{s['saat'].replace(':', '')}-{s['ad']}"
 
         if s['tur'] == 'story':
@@ -124,7 +126,7 @@ def main():
             if my_vids:
                 out = os.path.join('stories', stamp + '.mp4')
                 story.video_story(os.path.join(ROOT, 'videolar', my_vids[0]), lab, head, os.path.join(ROOT, out),
-                                  tema=tema, v=week * 211 + k)
+                                  tema=tema, v=week * 211 + k, sablon=sablon)
             else:
                 p = my_photos[0]
                 kr = crop.get(p, [0.5, 0.35])
@@ -138,7 +140,7 @@ def main():
                 else:
                     out = os.path.join('stories', stamp + '.jpg')
                     story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
-                               ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb)
+                               ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb, sablon=sablon)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
             if s.get('deneme'):
@@ -151,7 +153,7 @@ def main():
             sl = spec['slaytlar']
             src = my_vids if my_vids else my_photos[:need]
             js = {'slaytlar': [[src[j % len(src)], t, h] for j, (t, h) in enumerate(sl)],
-                  'kapanis': [my_photos[need]] + spec['kapanis'], 'tema': tema, 'v': week * 211 + k,
+                  'kapanis': [my_photos[need]] + spec['kapanis'], 'tema': tema, 'sablon': sablon, 'v': week * 211 + k,
                   'video': bool(my_vids)}
             json.dump(js, open(os.path.join(ROOT, 'reels', stamp + '.json'), 'w', encoding='utf-8'),
                       ensure_ascii=False, indent=1)

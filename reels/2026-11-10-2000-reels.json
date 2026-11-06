@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video079.mp4",
+   "video083.mp4",
    "Can Besicilik",
    "Hayvanlarımızı görün"
   ],
   [
-   "video080.mp4",
+   "video084.mp4",
    "Bakımlı ve sağlıklı",
    "Her gün özenle"
   ],
   [
-   "video081.mp4",
+   "video085.mp4",
    "Gelin, seçin",
    "Yerimize bekleriz"
   ]
  ],
  "kapanis": [
-  "foto053.jpg",
+  "foto058.jpg",
   "Yerimize bekleriz",
   "Gelin, görün, seçin",
   "Adaklığınızı yerinde seçme imkânı."
  ],
- "tema": "yesil",
- "v": 246,
+ "tema": "bordo",
+ "sablon": "cerceve",
+ "v": 247,
  "video": true
 }

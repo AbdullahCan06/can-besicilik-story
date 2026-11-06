@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video007.mp4",
+   "video009.mp4",
    "İhtiyaç sahiplerine",
    "Adağınız yerini bulsun"
   ],
   [
-   "video008.mp4",
+   "video010.mp4",
    "Paylaştıkça bereket",
    "Sizin adınıza ulaştırıyoruz"
   ],
   [
-   "video009.mp4",
+   "video011.mp4",
    "Can Besicilik",
    "Niyetiniz bize emanet"
   ]
  ],
  "kapanis": [
-  "foto027.jpg",
+  "foto031.jpg",
   "İhtiyaç sahiplerine",
   "Adağınız yerini bulsun",
   "Kurbanınızı dilerseniz sizin adınıza ihtiyaç sahiplerine ulaştırıyoruz."
  ],
- "tema": "kahve",
- "v": 273,
+ "tema": "siyah",
+ "sablon": "ust",
+ "v": 274,
  "video": true
 }

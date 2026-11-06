@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video065.mp4",
+   "video069.mp4",
    "Ankara içi",
    "Eve kadar teslim"
   ],
   [
-   "video066.mp4",
+   "video070.mp4",
    "Kesim ücretsiz",
    "Kesim bizden"
   ],
   [
-   "video067.mp4",
+   "video071.mp4",
    "Kredi kartı",
    "Kartla ödeme"
   ]
  ],
  "kapanis": [
-  "foto22.jpg",
+  "foto026.jpg",
   "Kolay hizmet",
   "Siz sadece arayın",
   "Kesim ve teslimat bizden."
  ],
- "tema": "zeytin",
- "v": 233,
+ "tema": "yesil",
+ "sablon": "ust",
+ "v": 234,
  "video": true
 }

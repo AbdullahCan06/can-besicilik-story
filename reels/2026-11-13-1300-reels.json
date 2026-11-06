@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video003.mp4",
+   "video005.mp4",
    "Cuma bereketi",
    "Hayırlı Cumalar"
   ],
   [
-   "video004.mp4",
+   "video006.mp4",
    "Adak ve şükür",
    "Niyetiniz kabul olsun"
   ],
   [
-   "video005.mp4",
+   "video007.mp4",
    "Can Besicilik",
    "Hizmetinizdeyiz"
   ]
  ],
  "kapanis": [
-  "foto18.jpg",
+  "foto24.jpg",
   "Hayırlı Cumalar",
   "Allah kabul etsin",
   "Adak ve şükür kurbanlarınız için bize ulaşın."
  ],
- "tema": "yesil",
- "v": 270,
+ "tema": "bordo",
+ "sablon": "rozet",
+ "v": 271,
  "video": true
 }

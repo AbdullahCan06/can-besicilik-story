@@ -58,7 +58,8 @@ def _olcek(a, T):
             f"1+0.07*sin(2*PI*1.6*({tl}-0.36)))))")
 
 
-def filtre(base_label, ilk_giris, n, sure, out_label='o'):
+def filtre(base_label, ilk_giris, n, sure, out_label='o', y=None):
+    yc = y or Y_MERKEZ
     """[base_label] videosuna, ilk_giris numaralı girişten başlayan n etiket PNG'sini sırayla bindirir."""
     T = sure / n
     parts, cur = [], base_label
@@ -67,7 +68,7 @@ def filtre(base_label, ilk_giris, n, sure, out_label='o'):
         s = _olcek(a, T)
         parts.append(f"[{ilk_giris + i}:v]format=rgba,scale=w='max(2,iw*{s})':h='max(2,ih*{s})':eval=frame[e{i}]")
         nxt = out_label if i == n - 1 else f'b{i}'
-        parts.append(f"[{cur}][e{i}]overlay=x='(W-w)/2':y='{Y_MERKEZ}-h/2':eval=frame:"
+        parts.append(f"[{cur}][e{i}]overlay=x='(W-w)/2':y='{yc}-h/2':eval=frame:"
                      f"enable='between(t,{a:.3f},{b - 0.01:.3f})'[{nxt}]")
         cur = nxt
     return ';'.join(parts)
@@ -84,7 +85,7 @@ def etiket_girisleri(tmpdir, sure):
     return args, len(a['metinler'])
 
 
-def foto_video(photo_img, overlay_rgba, out, sure=10, varyant=None):
+def foto_video(photo_img, overlay_rgba, out, sure=10, varyant=None, y=None):
     """Fotoğraflı story'yi hareketli etiketli kısa videoya çevirir (hafif yakınlaşma + müzik)."""
     import muzik
     tmp = out[:-4] + '_tmp'
@@ -95,7 +96,7 @@ def foto_video(photo_img, overlay_rgba, out, sure=10, varyant=None):
     muzik.make(wav, sure, varyant=varyant or os.path.basename(out))
     eargs, n = etiket_girisleri(tmp, sure)
     fc = (f"[0:v]scale=w='{W}*(1+0.06*t/{sure})':h=-2:eval=frame,crop={W}:{H},setsar=1[z];"
-          f"[z][1:v]overlay=0:0[y];" + filtre('y', 3, n, sure) + ";[o]format=yuv420p[v]")
+          f"[z][1:v]overlay=0:0[y];" + filtre('y', 3, n, sure, y=y) + ";[o]format=yuv420p[v]")
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-loop', '1', '-framerate', str(FPS), '-t', str(sure),
                     '-i', bp, '-loop', '1', '-framerate', str(FPS), '-t', str(sure), '-i', op, '-i', wav] + eargs +
                    ['-filter_complex', fc, '-map', '[v]', '-map', '2:a', '-t', str(sure),
@@ -107,7 +108,7 @@ def foto_video(photo_img, overlay_rgba, out, sure=10, varyant=None):
     reel.normalize(out)
 
 
-def videoya_ekle(path):
+def videoya_ekle(path, y=None):
     """Hazır bir videonun (Reels) üstüne hareketli etiketleri bindirir; ses aynen kalır."""
     sure = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
                                           '-of', 'csv=p=0', path]).decode().strip())
@@ -115,7 +116,7 @@ def videoya_ekle(path):
     os.makedirs(tmp, exist_ok=True)
     eargs, n = etiket_girisleri(tmp, sure)
     out = path[:-4] + '_et.mp4'
-    fc = filtre('0:v', 1, n, sure) + ';[o]format=yuv420p[v]'
+    fc = filtre('0:v', 1, n, sure, y=y) + ';[o]format=yuv420p[v]'
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path] + eargs +
                    ['-filter_complex', fc, '-map', '[v]', '-map', '0:a?', '-t', f'{sure}',
                     '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '22', '-c:a', 'copy',

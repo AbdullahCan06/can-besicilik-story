@@ -279,14 +279,17 @@ def foto_story_video(photo, headline, out, ybias=0.5, xbias=0.5, tema=None, v=No
     hareket.foto_video(base, sade_overlay(headline, v, tema), out)
 
 
-def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None, wybias=0.55, yerlesim=None):
+def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=None, wybias=0.55, yerlesim=None,
+         sablon=None, hareketli=False):
     mod = yerlesim or CFG.get('yerlesim', 'pencere')
     if sade_aktif() and yerlesim != 'tam':
         set_tema(tema)
         src0 = photo if isinstance(photo, Image.Image) else Image.open(photo)
         src0 = ImageOps.exif_transpose(src0) if not isinstance(photo, Image.Image) else src0
         base = cover(src0, W, H, ybias if CFG.get('kirpma', {}).get(os.path.basename(str(photo))) else 0.5, xbias)
-        base = Image.alpha_composite(base.convert('RGBA'), sade_overlay(headline, v, tema, hareketli=False)).convert('RGB')
+        import sablonlar
+        base = Image.alpha_composite(base.convert('RGBA'),
+                                     sablonlar.overlay(sablon or 'sade', headline, v, tema, hareketli=hareketli)).convert('RGB')
         if out is None:
             return base
         base.save(out, quality=92)
@@ -375,11 +378,12 @@ def make(photo, label, headline, body, out, ybias=0.35, xbias=0.5, tema=None, v=
     base.save(out, quality=92)
 
 
-def overlay_png(label, headline, out, tema=None, v=None):
+def overlay_png(label, headline, out, tema=None, v=None, sablon=None):
     """Story yazı katmanını şeffaf PNG olarak üretir (videonun üstüne bindirmek için).
     Siyah ve beyaz zemin üzerinde iki kez çizip farkından saydamlığı hesaplar."""
     if sade_aktif():
-        sade_overlay(headline, v, tema).save(out)
+        import sablonlar
+        sablonlar.overlay(sablon or 'sade', headline, v, tema, hareketli=True).save(out)
         return
     import numpy as np
     a = np.asarray(make(Image.new('RGB', (W, H), (0, 0, 0)), label, headline, '', None, tema=tema, v=v, yerlesim='tam'),
@@ -393,13 +397,13 @@ def overlay_png(label, headline, out, tema=None, v=None):
     Image.fromarray(rgba, 'RGBA').save(out)
 
 
-def video_story(video, label, headline, out, tema=None, v=None, sure=10):
+def video_story(video, label, headline, out, tema=None, v=None, sure=10, sablon=None):
     """Videonun üstüne story yazı katmanını bindirir, telifsiz müzik ekler."""
     import subprocess
     import muzik
     png = out[:-4] + '_kat.png'
     wav = out[:-4] + '_muzik.wav'
-    overlay_png(label, headline, png, tema=tema, v=v)
+    overlay_png(label, headline, png, tema=tema, v=v, sablon=sablon)
     muzik.make(wav, sure, varyant=os.path.basename(out))
     # kısa videolar başa sararak süreyi doldurur
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-stream_loop', '-1', '-i', video, '-i', png, '-i', wav,
@@ -412,7 +416,8 @@ def video_story(video, label, headline, out, tema=None, v=None, sure=10):
     os.remove(wav)
     import hareket
     if sade_aktif() and hareket.ayar():
-        hareket.videoya_ekle(out)
+        import sablonlar
+        hareket.videoya_ekle(out, y=sablonlar.ETIKET_Y.get(sablon or 'sade'))
     import reel
     reel.normalize(out)
 

@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video102.mp4",
+   "video104.mp4",
    "Akika kurbanı",
    "Yeni doğan bebeğiniz için"
   ],
   [
-   "video103.mp4",
+   "video001.mp4",
    "Sünnete uygun",
    "İslami usullere uygun kesim"
   ],
   [
-   "video104.mp4",
+   "video002.mp4",
    "Can Besicilik",
    "Kesip teslim ediyoruz"
   ]
  ],
  "kapanis": [
-  "foto102.jpg",
+  "foto107.jpg",
   "Akika kurbanı",
   "Hayırlı uğurlu olsun",
   "Bebeğinizin akikası için bize WhatsApp'tan yazın."
  ],
- "tema": "bordo",
- "v": 265,
+ "tema": "lacivert",
+ "sablon": "rozet",
+ "v": 266,
  "video": true
 }

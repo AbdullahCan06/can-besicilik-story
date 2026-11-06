@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video056.mp4",
+   "video059.mp4",
    "Yetişen alıyor",
    "Adaklıklar tükeniyor"
   ],
   [
-   "video057.mp4",
+   "video060.mp4",
    "Son günler",
    "Fiyatlar artmadan gelin"
   ],
   [
-   "video058.mp4",
+   "video061.mp4",
    "Can Besicilik",
    "Hayvanınızı kendiniz seçin"
   ]
  ],
  "kapanis": [
-  "foto095.jpg",
+  "foto10.jpg",
   "Yetişen alıyor",
   "Kaçırmayın",
   "Adaklıklar tükenmeden yerinizi ayırtın."
  ],
- "tema": "lacivert",
- "v": 224,
+ "tema": "kahve",
+ "sablon": "kart",
+ "v": 225,
  "video": true
 }

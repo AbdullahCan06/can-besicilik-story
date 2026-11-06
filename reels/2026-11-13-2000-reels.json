@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video011.mp4",
+   "video012.mp4",
    "Şükür kurbanı",
    "Sevinçli günlerinizde"
   ],
   [
-   "video012.mp4",
+   "video013.mp4",
    "Can Besicilik",
    "Şükrünüzü paylaşın"
   ],
   [
-   "video013.mp4",
+   "video014.mp4",
    "Uygun fiyat",
    "5.000 TL'den başlayan fiyatlar"
   ]
  ],
  "kapanis": [
-  "foto033.jpg",
+  "foto038.jpg",
   "Şükür kurbanı",
   "Şükrünüzü paylaşın",
   "Şükür kurbanınızı sizin için kesip teslim ediyoruz."
  ],
- "tema": "zeytin",
- "v": 275,
+ "tema": "yesil",
+ "sablon": "rozet",
+ "v": 276,
  "video": true
 }

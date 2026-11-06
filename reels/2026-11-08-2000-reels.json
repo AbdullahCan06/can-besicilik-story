@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video060.mp4",
+   "video064.mp4",
    "Aksaray yaylası",
    "Yaylım hayvanları"
   ],
   [
-   "video061.mp4",
+   "video065.mp4",
    "Veteriner kontrollü",
    "Sağlıklı kurbanlıklar"
   ],
   [
-   "video062.mp4",
+   "video066.mp4",
    "Adaklık yaşında",
    "Gönül rahatlığıyla"
   ]
  ],
  "kapanis": [
-  "foto105.jpg",
+  "foto12.jpg",
   "Güven veriyoruz",
   "Adağınız emin ellerde",
   "Veteriner kontrollü Aksaray yaylım hayvanı."
  ],
- "tema": "yesil",
- "v": 228,
+ "tema": "bordo",
+ "sablon": "ust",
+ "v": 229,
  "video": true
 }

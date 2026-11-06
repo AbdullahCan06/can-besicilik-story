@@ -1,28 +1,29 @@
 {
  "slaytlar": [
   [
-   "video075.mp4",
+   "video078.mp4",
    "Adak kurbanı",
    "Adağınızı ertelemeyin"
   ],
   [
-   "video076.mp4",
+   "video079.mp4",
    "Can Besicilik",
    "Kesip teslim ediyoruz"
   ],
   [
-   "video077.mp4",
+   "video080.mp4",
    "İsterseniz",
    "İhtiyaç sahiplerine ulaştırırız"
   ]
  ],
  "kapanis": [
-  "foto043.jpg",
+  "foto048.jpg",
   "Adak kurbanı",
   "Adağınız yerini bulsun",
   "Gün ve saati siz belirleyin, gerisini bize bırakın."
  ],
- "tema": "lacivert",
- "v": 242,
+ "tema": "kahve",
+ "sablon": "sade",
+ "v": 243,
  "video": true
 }
