@@ -73,9 +73,12 @@ def main():
     reels_pool = cfg['reels']
     reel_idx = {}
     rc = {}
-    haftalik_reels = sum(1 for _, _, s in slots if s['tur'] != 'story') or 1
+    deneme_idx = {}
+    haftalik_reels = sum(1 for _, _, s in slots if s['tur'] != 'story' and not s.get('deneme')) or 1
     for k, (i, gun, s) in enumerate(slots):
-        if s['tur'] != 'story':
+        if s.get('deneme'):
+            deneme_idx[k] = len(deneme_idx)
+        if s['tur'] != 'story' and not s.get('deneme'):
             n = rc.get(s['ad'], 0)
             rc[s['ad']] = n + 1
             reel_idx[k] = (n, (week * haftalik_reels + n) % len(reels_pool))
@@ -138,8 +141,13 @@ def main():
                                ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb)
             plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
         else:
-            n, ridx = reel_idx[k]
-            spec = reels_pool[ridx]
+            if s.get('deneme'):
+                dn = deneme_idx[k]
+                dpool = cfg.get('deneme_reels') or reels_pool
+                n, spec = dn, dpool[(week * 2 + dn) % len(dpool)]
+            else:
+                n, ridx = reel_idx[k]
+                spec = reels_pool[ridx]
             sl = spec['slaytlar']
             src = my_vids if my_vids else my_photos[:need]
             js = {'slaytlar': [[src[j % len(src)], t, h] for j, (t, h) in enumerate(sl)],
@@ -153,11 +161,19 @@ def main():
             v = week * 211 + k
             ekler = kp.get('aciklama_ekleri') or [kp.get('aciklama_ek', '')]
             son = kp.get('aciklama_son') or ['']
-            acik = ekler[v % len(ekler)] + spec['aciklama']
-            if '0533' not in spec['aciklama']:
-                acik += '\n\n' + son[v % len(son)]
+            if s.get('deneme'):
+                acik = spec['aciklama']
+            else:
+                acik = ekler[v % len(ekler)] + spec['aciklama']
+                if '0533' not in spec['aciklama']:
+                    acik += '\n\n' + son[v % len(son)]
             item = {'tarih': tarih, 'tur': 'REEL', 'baslik': sl[0][1],
                     'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': acik, 'muzik': muz}
+            if s.get('deneme'):
+                # Deneme Reels (Instagram TRIAL_REEL): kütüphane müziği yok, videodaki kendi müziğimiz
+                # kalır; kullanıcı sonradan reklama çevirebilsin.
+                item['deneme'] = True
+                item.pop('muzik', None)
             rk = cfg.get('reklam') or {}
             if rk.get('aktif') and gun in rk.get('gunler', []) and s['saat'] == rk.get('saat'):
                 item['reklam_butce'] = rk['butce_tl']

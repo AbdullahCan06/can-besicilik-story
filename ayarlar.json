@@ -169,6 +169,16 @@
         "Perşembe",
         "Cumartesi"
       ]
+    },
+    {
+      "ad": "deneme",
+      "tur": "reels",
+      "saat": "21:00",
+      "gunler": [
+        "Cuma",
+        "Cumartesi"
+      ],
+      "deneme": true
     }
   ],
   "sabah": [
@@ -1060,7 +1070,7 @@
     ]
   ],
   "reklam": {
-    "aktif": true,
+    "aktif": false,
     "gunler": [
       "Salı",
       "Perşembe"
@@ -1078,5 +1088,95 @@
       "ANKARA İÇİ ÜCRETSİZ TESLİMAT"
     ],
     "fotograf_story_video": false
-  }
+  },
+  "deneme_reels": [
+    {
+      "slaytlar": [
+        [
+          "",
+          "Ankara'nın Adakçısı"
+        ],
+        [
+          "",
+          "5.000 TL'den başlayan fiyatlar"
+        ],
+        [
+          "",
+          "Yerimize bekleriz"
+        ]
+      ],
+      "kapanis": [
+        "",
+        "Yerinizi ayırtın",
+        ""
+      ],
+      "aciklama": "📍 Ankara'nın Adakçısı: Can Besicilik 🐑\n\n💰 5.000 TL'den başlayan fiyatlarla adak, akika ve şükür kurbanı. Birden fazla alımda özel indirim!\n\n✅ Kredi kartı geçerli, komisyonsuz\n✅ Kesim ücretsiz\n✅ Ankara içi ücretsiz teslimat\n\nYerimize bekleriz, hayvanınızı kendiniz seçin.\n\n📲 WhatsApp: 0533 778 83 03\n\n#adak #akika #şükürkurbanı #kurbanlık #ankara #canbesicilik"
+    },
+    {
+      "slaytlar": [
+        [
+          "",
+          "Adak • Akika • Şükür"
+        ],
+        [
+          "",
+          "Kesim ücretsiz"
+        ],
+        [
+          "",
+          "Ankara içi ücretsiz teslimat"
+        ]
+      ],
+      "kapanis": [
+        "",
+        "Hemen arayın",
+        ""
+      ],
+      "aciklama": "📍 Ankara'nın Adakçısı: Can Besicilik 🐑\n\n💰 5.000 TL'den başlayan fiyatlarla adak, akika ve şükür kurbanı. Birden fazla alımda özel indirim!\n\n✅ Kredi kartı geçerli, komisyonsuz\n✅ Kesim ücretsiz\n✅ Ankara içi ücretsiz teslimat\n\nYerimize bekleriz, hayvanınızı kendiniz seçin.\n\n📲 WhatsApp: 0533 778 83 03\n\n#adak #akika #şükürkurbanı #kurbanlık #ankara #canbesicilik"
+    },
+    {
+      "slaytlar": [
+        [
+          "",
+          "Hayvanınızı kendiniz seçin"
+        ],
+        [
+          "",
+          "Veteriner kontrollü hayvanlar"
+        ],
+        [
+          "",
+          "Kredi kartı geçerli, komisyonsuz"
+        ]
+      ],
+      "kapanis": [
+        "",
+        "Yerinizi ayırtın",
+        ""
+      ],
+      "aciklama": "📍 Ankara'nın Adakçısı: Can Besicilik 🐑\n\n💰 5.000 TL'den başlayan fiyatlarla adak, akika ve şükür kurbanı. Birden fazla alımda özel indirim!\n\n✅ Kredi kartı geçerli, komisyonsuz\n✅ Kesim ücretsiz\n✅ Ankara içi ücretsiz teslimat\n\nYerimize bekleriz, hayvanınızı kendiniz seçin.\n\n📲 WhatsApp: 0533 778 83 03\n\n#adak #akika #şükürkurbanı #kurbanlık #ankara #canbesicilik"
+    },
+    {
+      "slaytlar": [
+        [
+          "",
+          "Birden fazla alımda özel indirim"
+        ],
+        [
+          "",
+          "Adaklıklar tükenmeden gelin"
+        ],
+        [
+          "",
+          "5.000 TL'den başlayan fiyatlar"
+        ]
+      ],
+      "kapanis": [
+        "",
+        "Hemen arayın",
+        ""
+      ],
+      "aciklama": "📍 Ankara'nın Adakçısı: Can Besicilik 🐑\n\n💰 5.000 TL'den başlayan fiyatlarla adak, akika ve şükür kurbanı. Birden fazla alımda özel indirim!\n\n✅ Kredi kartı geçerli, komisyonsuz\n✅ Kesim ücretsiz\n✅ Ankara içi ücretsiz teslimat\n\nYerimize bekleriz, hayvanınızı kendiniz seçin.\n\n📲 WhatsApp: 0533 778 83 03\n\n#adak #akika #şükürkurbanı #kurbanlık #ankara #canbesicilik"
+    }
+  ]
 }
