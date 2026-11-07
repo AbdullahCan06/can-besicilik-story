@@ -65,7 +65,7 @@ def add(track, sig, at, gain=1.0):
     track[i:j] += sig[:j - i] * gain
 
 
-def make(path, seconds, varyant=None):
+def _sentez(path, seconds, varyant=None):
     """varyant verilirse tempo, ton, akor dizisi, melodi ve çalgı rengi değişir (her video farklı müzik)."""
     global BPM, BEAT
     rng = np.random.RandomState(7 if varyant is None else (__import__('zlib').crc32(str(varyant).encode()) % (2 ** 31)))
@@ -178,6 +178,47 @@ def _make_var(path, seconds, rng):
         w.setsampwidth(2)
         w.setframerate(SR)
         w.writeframes((st * 32767).astype(np.int16).tobytes())
+
+
+# --- Gerçek kayıtlar -----------------------------------------------------------------
+# assets/muzik/ klasörüne telifsiz gerçek müzik dosyaları (mp3/m4a/wav/ogg) konursa
+# videolarda bunlar kullanılır; klasör boşsa eski bilgisayar müziğine (_sentez) düşülür.
+import os as _os
+import subprocess as _sp
+import zlib as _zlib
+
+KAYIT_DIR = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'assets', 'muzik')
+
+
+def kayitlar():
+    if not _os.path.isdir(KAYIT_DIR):
+        return []
+    return sorted(_os.path.join(KAYIT_DIR, f) for f in _os.listdir(KAYIT_DIR)
+                  if f.lower().endswith(('.mp3', '.m4a', '.wav', '.ogg', '.aac', '.flac')))
+
+
+def _sure(f):
+    return float(_sp.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                                   '-of', 'csv=p=0', f]).decode().strip())
+
+
+def make(path, seconds, varyant=None):
+    """Gerçek kayıt varsa ondan, yoksa sentezle seconds uzunluğunda stereo 44.1 kHz wav yazar."""
+    ks = kayitlar()
+    if not ks:
+        return _sentez(path, seconds, varyant)
+    h = _zlib.crc32(str(varyant).encode()) if varyant else 0
+    f = ks[h % len(ks)]
+    total = _sure(f)
+    bos = max(0.0, total - seconds - 2)
+    # parçanın ilk %60'ından deterministik bir başlangıç noktası (her video farklı yer)
+    bas = (h // len(ks) % 1000) / 1000 * min(bos, total * 0.6) if bos > 0 else 0.0
+    fo = max(0.0, seconds - 1.5)
+    af = (f'afade=t=in:st=0:d=0.6,afade=t=out:st={fo:.2f}:d=1.5,'
+          f'loudnorm=I=-16:TP=-1.5:LRA=11')
+    loop = ['-stream_loop', '-1'] if total < seconds + 0.5 else []
+    _sp.run(['ffmpeg', '-y', '-loglevel', 'error'] + loop + ['-ss', f'{bas:.2f}', '-i', f, '-t', f'{seconds:.3f}',
+             '-af', af, '-ar', '44100', '-ac', '2', '-c:a', 'pcm_s16le', path], check=True)
 
 
 if __name__ == '__main__':

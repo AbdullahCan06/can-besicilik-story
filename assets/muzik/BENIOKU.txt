@@ -1,0 +1,4 @@
+Bu klasöre telifsiz GERÇEK müzik kayıtları (mp3/m4a/wav) koyun.
+Videolu story, deneme Reels ve Facebook Reels bu dosyalardan müzik alır.
+Klasör boşsa bilgisayarla üretilen müzik kullanılır.
+Önerilen kaynak: pixabay.com/music (ticari kullanım serbest, kaynak göstermek gerekmez).
