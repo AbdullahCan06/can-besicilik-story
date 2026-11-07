@@ -173,6 +173,16 @@
     {
       "ad": "deneme",
       "tur": "reels",
+      "saat": "15:00",
+      "gunler": [
+        "Cuma",
+        "Cumartesi"
+      ],
+      "deneme": true
+    },
+    {
+      "ad": "deneme",
+      "tur": "reels",
       "saat": "21:00",
       "gunler": [
         "Cuma",

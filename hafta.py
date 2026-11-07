@@ -75,6 +75,7 @@ def main():
     reel_idx = {}
     rc = {}
     deneme_idx = {}
+    haftalik_deneme = sum(1 for _, _, s in slots if s.get('deneme')) or 1
     haftalik_reels = sum(1 for _, _, s in slots if s['tur'] != 'story' and not s.get('deneme')) or 1
     for k, (i, gun, s) in enumerate(slots):
         if s.get('deneme'):
@@ -146,7 +147,7 @@ def main():
             if s.get('deneme'):
                 dn = deneme_idx[k]
                 dpool = cfg.get('deneme_reels') or reels_pool
-                n, spec = dn, dpool[(week * 2 + dn) % len(dpool)]
+                n, spec = dn, dpool[(week * haftalik_deneme + dn + int(os.environ.get('DENEME_KAYDIR', 0))) % len(dpool)]
             else:
                 n, ridx = reel_idx[k]
                 spec = reels_pool[ridx]
