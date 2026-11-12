@@ -1,0 +1,29 @@
+{
+ "slaytlar": [
+  [
+   "video102.mp4",
+   "Toplu alım",
+   "Birden fazla alımda indirim"
+  ],
+  [
+   "video103.mp4",
+   "Aile ve dernekler",
+   "Size özel fiyat"
+  ],
+  [
+   "video104.mp4",
+   "Hemen arayın",
+   "Teklif alın"
+  ]
+ ],
+ "kapanis": [
+  "foto042.jpg",
+  "Özel indirim",
+  "Toplu alıma özel fiyat",
+  "Birden fazla adak için bizi arayın."
+ ],
+ "tema": "zeytin",
+ "sablon": "ust",
+ "v": 437,
+ "video": true
+}

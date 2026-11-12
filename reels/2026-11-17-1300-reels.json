@@ -1,0 +1,29 @@
+{
+ "slaytlar": [
+  [
+   "video017.mp4",
+   "Fiyat",
+   "5.000 TL'den başlıyor"
+  ],
+  [
+   "video018.mp4",
+   "Her şey pahalanıyor",
+   "Bu fiyat kalmaz"
+  ],
+  [
+   "video019.mp4",
+   "Hemen gelin",
+   "Yerinizi ayırtın"
+  ]
+ ],
+ "kapanis": [
+  "foto087.jpg",
+  "Son günler",
+  "Fiyatlar artmadan alın",
+  "5.000 TL'den başlayan fiyatlarla."
+ ],
+ "tema": "zeytin",
+ "sablon": "cerceve",
+ "v": 455,
+ "video": true
+}

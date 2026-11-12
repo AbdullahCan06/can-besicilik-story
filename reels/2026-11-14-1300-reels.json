@@ -1,0 +1,29 @@
+{
+ "slaytlar": [
+  [
+   "video084.mp4",
+   "Yetişen alıyor",
+   "Adaklıklar tükeniyor"
+  ],
+  [
+   "video085.mp4",
+   "Son günler",
+   "Fiyatlar artmadan gelin"
+  ],
+  [
+   "video086.mp4",
+   "Can Besicilik",
+   "Hayvanınızı kendiniz seçin"
+  ]
+ ],
+ "kapanis": [
+  "foto102.jpg",
+  "Yetişen alıyor",
+  "Kaçırmayın",
+  "Adaklıklar tükenmeden yerinizi ayırtın."
+ ],
+ "tema": "zeytin",
+ "sablon": "cerceve",
+ "v": 425,
+ "video": true
+}

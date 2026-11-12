@@ -1,0 +1,29 @@
+{
+ "slaytlar": [
+  [
+   "video007.mp4",
+   "Can Besicilik",
+   "Hayvanlarımızı görün"
+  ],
+  [
+   "video008.mp4",
+   "Bakımlı ve sağlıklı",
+   "Her gün özenle"
+  ],
+  [
+   "video009.mp4",
+   "Gelin, seçin",
+   "Yerimize bekleriz"
+  ]
+ ],
+ "kapanis": [
+  "foto065.jpg",
+  "Yerimize bekleriz",
+  "Gelin, görün, seçin",
+  "Adaklığınızı yerinde seçme imkânı."
+ ],
+ "tema": "lacivert",
+ "sablon": "sade",
+ "v": 446,
+ "video": true
+}
