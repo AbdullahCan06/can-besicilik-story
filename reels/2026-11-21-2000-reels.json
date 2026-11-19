@@ -1,0 +1,29 @@
+{
+ "slaytlar": [
+  [
+   "video031.mp4",
+   "Can Besicilik",
+   "Hayvanlarımızı görün"
+  ],
+  [
+   "video032.mp4",
+   "Bakımlı ve sağlıklı",
+   "Her gün özenle"
+  ],
+  [
+   "video033.mp4",
+   "Gelin, seçin",
+   "Yerimize bekleriz"
+  ]
+ ],
+ "kapanis": [
+  "foto060.jpg",
+  "Yerimize bekleriz",
+  "Gelin, görün, seçin",
+  "Adaklığınızı yerinde seçme imkânı."
+ ],
+ "tema": "yesil",
+ "sablon": "rozet",
+ "v": 642,
+ "video": true
+}

@@ -142,7 +142,7 @@ def main():
                     out = os.path.join('stories', stamp + '.jpg')
                     story.make(os.path.join(ROOT, 'fotograflar', p), lab, head, body, os.path.join(ROOT, out),
                                ybias=yb, xbias=xb, tema=tema, v=week * 211 + k, wybias=wyb, sablon=sablon)
-            plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out})
+            plan.append({'tarih': tarih, 'tur': 'STORY', 'baslik': head, 'url': RAW + out, 'sablon': sablon})
         else:
             if s.get('deneme'):
                 dn = deneme_idx[k]
@@ -171,7 +171,7 @@ def main():
                 if '0533' not in spec['aciklama']:
                     acik += '\n\n' + son[v % len(son)]
             item = {'tarih': tarih, 'tur': 'REEL', 'baslik': sl[0][1],
-                    'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': acik, 'muzik': muz}
+                    'url': RAW + 'reels/' + stamp + '.mp4', 'aciklama': acik, 'muzik': muz, 'sablon': sablon}
             if s.get('deneme'):
                 # Deneme Reels (Instagram TRIAL_REEL): kütüphane müziği yok, videodaki kendi müziğimiz
                 # kalır; kullanıcı sonradan reklama çevirebilsin.
