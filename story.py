@@ -415,7 +415,7 @@ def video_story(video, label, headline, out, tema=None, v=None, sure=10, sablon=
     os.remove(png)
     os.remove(wav)
     import hareket
-    if sade_aktif() and hareket.ayar():
+    if sade_aktif() and hareket.ayar() and sablon != 'logo':
         import sablonlar
         hareket.videoya_ekle(out, y=sablonlar.ETIKET_Y.get(sablon or 'sade'))
     import reel

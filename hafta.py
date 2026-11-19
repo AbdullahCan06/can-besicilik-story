@@ -39,6 +39,7 @@ def main():
     ap.add_argument('--gun', help='yalnızca bu tarih (YYYY-MM-DD)')
     ap.add_argument('--sadece', help='yalnızca bu slot adı (sabah/aksam/reels)')
     ap.add_argument('--saat', help='yalnızca bu saat (HH:MM)')
+    ap.add_argument('--sadece-story', action='store_true', help='Reels üretmeden yalnızca story üret')
     a = ap.parse_args()
 
     cfg = story.CFG
@@ -116,6 +117,10 @@ def main():
         tarih = f"{day.isoformat()}T{s['saat']}:00"
         tema = story.TEMA_SIRASI[(week + k) % len(story.TEMA_SIRASI)]
         sablon = sablonlar.sec(week * 3 + k)
+        if s['tur'] == 'story' and cfg.get('story_sablonu'):
+            sablon = cfg['story_sablonu']   # ör. "logo": story'lerde yalnızca logo, yazı yok
+        if a.sadece_story and s['tur'] != 'story':
+            continue
         stamp = f"{day.isoformat()}-{s['saat'].replace(':', '')}-{s['ad']}"
 
         if s['tur'] == 'story':
@@ -130,11 +135,18 @@ def main():
                                   tema=tema, v=week * 211 + k, sablon=sablon)
             else:
                 p = my_photos[0]
+                if sablon == 'logo':
+                    # yalnızca-logo story'lerde yazı olmadığı için fotoğrafta hayvan görünmeli
+                    haric = set(cfg.get('logo_story_haric') or [])
+                    j = 0
+                    while p in haric and j < len(ph):
+                        j += 1
+                        p = ph[(ph.index(my_photos[0]) + j) % len(ph)]
                 kr = crop.get(p, [0.5, 0.35])
                 xb, yb = kr[0], kr[1]
                 wyb = kr[2] if len(kr) > 2 else 0.55   # 3. değer: fotoğraf penceresinin dikey konumu (0 üst, 1 alt)
                 import hareket
-                if story.sade_aktif() and hareket.ayar() and hareket.ayar().get('fotograf_story_video'):
+                if story.sade_aktif() and sablon != 'logo' and hareket.ayar() and hareket.ayar().get('fotograf_story_video'):
                     out = os.path.join('stories', stamp + '.mp4')
                     story.foto_story_video(os.path.join(ROOT, 'fotograflar', p), head, os.path.join(ROOT, out),
                                            ybias=yb, xbias=xb, tema=tema, v=week * 211 + k)

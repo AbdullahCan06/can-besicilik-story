@@ -1090,6 +1090,8 @@
     "odeyen": "Can Besicilik"
   },
   "sablon": "sade",
+  "story_sablonu": "logo",
+  "logo_story_haric": ["foto052.jpg", "foto016.jpg", "foto061.jpg"],
   "hareketli_etiketler": {
     "aktif": true,
     "metinler": [

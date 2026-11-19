@@ -245,9 +245,25 @@ def _sabit_etiketler(ov, yc):
     return ov
 
 
+def logo(headline=None, kamp=None, hareketli=True):
+    """Yalnızca logo: sağ üst köşede logo (yüzleri ve hayvanları kapatmasın diye ortada değil),
+    yazı/fiyat/etiket yok. Instagram'ın üst çubuğunun altında kalır."""
+    ov = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    L = 160
+    x, y = W - L - 64, 220
+    sh = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(sh).ellipse((x - 14, y - 4, x + L + 14, y + L + 24), fill=120)
+    sh = sh.filter(ImageFilter.GaussianBlur(16))
+    ov.paste(Image.new('RGBA', (W, H), (0, 0, 0, 255)), (0, 0), sh)
+    _logo(ov, L, x, y)
+    return ov
+
+
 def overlay(ad, headline, v=None, tema=None, hareketli=True):
     if tema:
         story.set_tema(tema)
+    if ad == 'logo':
+        return logo()
     if ad == 'sade':
         return story.sade_overlay(headline, v, tema, hareketli=hareketli)
     kamp = story.variant(v)
